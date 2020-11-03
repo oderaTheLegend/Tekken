@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Drawing;
 
 public enum FrameState
 {
@@ -16,20 +15,21 @@ public class Character : MonoBehaviour
     [NonSerialized] public SpriteRenderer renderer;
     [NonSerialized] public Rigidbody2D rigidbody;
 
+    [Header("Neutral States")]
     [SerializeField] State idle;
-
     [SerializeField] State forward;
-
     [SerializeField] State backward;
-
     [SerializeField] State jump;
+    [SerializeField] State crouch;
+
+    [Header("Action States")]
+    [SerializeField] List<State> moveSets;
 
     State current;
 
-    [SerializeField] [Range(-1, 1)] int facing = 1;
-
     [Header("Platforming values")]
     [SerializeField] public float jumpHeight;
+    [SerializeField] [Range(-1, 1)] int facing = 1;
 
     Vector3 rightFacing;
 
@@ -37,14 +37,11 @@ public class Character : MonoBehaviour
 
     float lastMove;
 
-    public BoxCollider2D[] colliders;
-
-    bool canJump; // delete later
-
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
+
         rightFacing = transform.forward;
 
         current = idle;
@@ -52,42 +49,48 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        List<InputKey> input = InputManager.instance.ReturnHistory();
 
         GroundCheck();
 
-        if (horizontal * facing > 0)
+        if (input.Count > 1)
         {
-            if (current != forward) { 
-                current = forward;
-            }
-        }
-        else if (horizontal * facing < 0)
-        {
-            if (current != backward) { 
-                current = backward; 
-            }
-        }
-        else if (grounded)
-        {
-            if (current != idle) { 
-                current = idle;
-            }
-        }
-
-        if (vertical > 0)
-        {
-            if (current != jump) { 
-                current = jump;
-
-                canJump = true;
-
-                if (canJump)
+            if (input[1].dirKey == DirectionKey.Right)
+            {
+                if (facing > 0)
                 {
-                    rigidbody.velocity = Vector2.up * jumpHeight; 
-                    canJump = false;
-                }     
+                    if (current != forward)
+                        current = forward;
+                }
+                else
+                {
+                    if (current != backward)
+                        current = backward;
+                }
+            }
+            else if (input[1].dirKey == DirectionKey.Left)
+            {
+                if (facing > 0)
+                {
+                    if (current != backward)
+                        current = backward;
+                }
+                else
+                {
+                    if (current != forward)
+                        current = forward;
+                }
+            }
+            else if (grounded)
+            {
+                if (current != idle)
+                    current = idle;
+            }
+
+            if (input[1].dirKey == DirectionKey.Up)
+            {
+                if (current != jump)
+                    current = jump;
             }
         }
 

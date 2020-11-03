@@ -53,6 +53,11 @@ public class InputKey
     }
 }
 
+public struct PlayerInput
+{
+    InputKey[] inputs;
+}
+
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance = null;

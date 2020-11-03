@@ -7,8 +7,6 @@ using System;
 public class State : ScriptableObject
 {
     [SerializeField] public Sprite[] sprites;
-    [SerializeField] public BoxCollider2D[] colliders;
-
     [SerializeField] bool loop;
 
     [Header("Frame Details")]
@@ -19,7 +17,10 @@ public class State : ScriptableObject
     [SerializeField] public float moveSpeed = 0;
     [SerializeField] public float vertSpeed = 0;
 
-    public int index = 0;
+    [Header("Input")]
+    [SerializeField] public InputKey[] inputKey;
+
+    int index = 0;
     float time = 0;
 
     FrameState state;
@@ -30,6 +31,7 @@ public class State : ScriptableObject
     {
         state = FrameState.Running;
         time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
+
         //if (!vertApplied)
         //{
         //    float gravity = 2 * chara.jumpHeight / (sprites.Length * AnimationMaster.instance.AnimFrames * sprites.Length * AnimationMaster.instance.AnimFrames);
@@ -55,14 +57,7 @@ public class State : ScriptableObject
                     state = FrameState.Finished;
             }
 
-            chara.renderer.sprite = sprites[index];        
-
-            for (int i = 0; i < chara.colliders.Length; i++)
-            {
-                chara.colliders[i].offset = colliders[index].offset;
-                chara.colliders[i].size = colliders[index].size;
-            }
-
+            chara.renderer.sprite = sprites[index];
             time = 0;
         }
 
