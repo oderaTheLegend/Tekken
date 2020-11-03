@@ -35,6 +35,9 @@ public class Character : MonoBehaviour
 
     bool grounded;
 
+    public BoxCollider2D[] colliders;
+    bool canJump; // delete later
+
     float lastMove;
 
     private void Start()
@@ -91,6 +94,14 @@ public class Character : MonoBehaviour
             {
                 if (current != jump)
                     current = jump;
+
+                canJump = true;
+
+                if (canJump)
+                {
+                    rigidbody.velocity = Vector2.up * jumpHeight;
+                    canJump = false;
+                }
             }
         }
 

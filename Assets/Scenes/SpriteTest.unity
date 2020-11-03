@@ -936,6 +936,8 @@ MonoBehaviour:
   - {fileID: 0}
   jumpHeight: 2
   facing: 1
+  colliders:
+  - {fileID: 1768221754}
 --- !u!212 &1768221756
 SpriteRenderer:
   m_ObjectHideFlags: 0

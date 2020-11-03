@@ -7,6 +7,8 @@ using System;
 public class State : ScriptableObject
 {
     [SerializeField] public Sprite[] sprites;
+    [SerializeField] public BoxCollider2D[] colliders;
+
     [SerializeField] bool loop;
 
     [Header("Frame Details")]
@@ -58,6 +60,13 @@ public class State : ScriptableObject
             }
 
             chara.renderer.sprite = sprites[index];
+
+            for (int i = 0; i < chara.colliders.Length; i++)
+            {
+                chara.colliders[i].offset = colliders[index].offset;
+                chara.colliders[i].size = colliders[index].size;
+            }
+
             time = 0;
         }
 
