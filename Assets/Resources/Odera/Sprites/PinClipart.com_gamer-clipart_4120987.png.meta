@@ -1,0 +1,682 @@
+fileFormatVersion: 2
+guid: bce45bbc1d47eb540a70e092cd9d1e9e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6188797468797980285
+    second: PinClipart.com_gamer-clipart_4120987_0
+  - first:
+      213: 2399566162943142054
+    second: PinClipart.com_gamer-clipart_4120987_1
+  - first:
+      213: 7358291417301633349
+    second: PinClipart.com_gamer-clipart_4120987_2
+  - first:
+      213: 4590070508231218794
+    second: PinClipart.com_gamer-clipart_4120987_3
+  - first:
+      213: -2083656135529698569
+    second: PinClipart.com_gamer-clipart_4120987_4
+  - first:
+      213: -5900626361933830817
+    second: PinClipart.com_gamer-clipart_4120987_5
+  - first:
+      213: -469689636604373049
+    second: PinClipart.com_gamer-clipart_4120987_6
+  - first:
+      213: 764550250746980040
+    second: PinClipart.com_gamer-clipart_4120987_7
+  - first:
+      213: 203420304011220377
+    second: PinClipart.com_gamer-clipart_4120987_8
+  - first:
+      213: -4009302655411245748
+    second: PinClipart.com_gamer-clipart_4120987_9
+  - first:
+      213: -4562059468323623803
+    second: PinClipart.com_gamer-clipart_4120987_10
+  - first:
+      213: 8543359623374136965
+    second: PinClipart.com_gamer-clipart_4120987_11
+  - first:
+      213: -8661448864574851703
+    second: PinClipart.com_gamer-clipart_4120987_12
+  - first:
+      213: 7417993809225628835
+    second: PinClipart.com_gamer-clipart_4120987_13
+  - first:
+      213: 8408035528512800481
+    second: PinClipart.com_gamer-clipart_4120987_14
+  - first:
+      213: 179157988985910526
+    second: PinClipart.com_gamer-clipart_4120987_15
+  - first:
+      213: -928886267538657175
+    second: PinClipart.com_gamer-clipart_4120987_16
+  - first:
+      213: 2186622367423793780
+    second: PinClipart.com_gamer-clipart_4120987_17
+  - first:
+      213: 794833856118432387
+    second: PinClipart.com_gamer-clipart_4120987_18
+  - first:
+      213: -7987682148435010022
+    second: PinClipart.com_gamer-clipart_4120987_19
+  - first:
+      213: -2173025623081305350
+    second: PinClipart.com_gamer-clipart_4120987_20
+  - first:
+      213: -5866410709222875562
+    second: PinClipart.com_gamer-clipart_4120987_21
+  - first:
+      213: 819945900303881444
+    second: PinClipart.com_gamer-clipart_4120987_22
+  - first:
+      213: 4629769016170539441
+    second: PinClipart.com_gamer-clipart_4120987_23
+  - first:
+      213: 8074793597142596846
+    second: PinClipart.com_gamer-clipart_4120987_24
+  - first:
+      213: 4004101372634812803
+    second: PinClipart.com_gamer-clipart_4120987_25
+  - first:
+      213: -5949332564331495084
+    second: PinClipart.com_gamer-clipart_4120987_26
+  - first:
+      213: -6981299509383743805
+    second: PinClipart.com_gamer-clipart_4120987_27
+  - first:
+      213: -3351958755007516433
+    second: PinClipart.com_gamer-clipart_4120987_28
+  - first:
+      213: 525147055799666423
+    second: PinClipart.com_gamer-clipart_4120987_29
+  - first:
+      213: -720447282225558901
+    second: PinClipart.com_gamer-clipart_4120987_30
+  - first:
+      213: -1831696215981280592
+    second: PinClipart.com_gamer-clipart_4120987_31
+  - first:
+      213: -3663702646937822843
+    second: PinClipart.com_gamer-clipart_4120987_32
+  - first:
+      213: 499980650883272689
+    second: PinClipart.com_gamer-clipart_4120987_33
+  - first:
+      213: 2641585917863790955
+    second: PinClipart.com_gamer-clipart_4120987_34
+  - first:
+      213: -5344240460703207089
+    second: PinClipart.com_gamer-clipart_4120987_35
+  - first:
+      213: -7965410146372170457
+    second: PinClipart.com_gamer-clipart_4120987_36
+  - first:
+      213: -7401003711674903461
+    second: PinClipart.com_gamer-clipart_4120987_37
+  - first:
+      213: -7381692258747603805
+    second: PinClipart.com_gamer-clipart_4120987_38
+  - first:
+      213: 6042659555733044675
+    second: PinClipart.com_gamer-clipart_4120987_39
+  - first:
+      213: -3513213765198955248
+    second: PinClipart.com_gamer-clipart_4120987_40
+  - first:
+      213: -3139036533765943443
+    second: PinClipart.com_gamer-clipart_4120987_41
+  - first:
+      213: -5951261811322537968
+    second: PinClipart.com_gamer-clipart_4120987_42
+  - first:
+      213: 4285932827230353667
+    second: PinClipart.com_gamer-clipart_4120987_43
+  - first:
+      213: -3429221595275799167
+    second: PinClipart.com_gamer-clipart_4120987_44
+  - first:
+      213: -3474166100151575844
+    second: PinClipart.com_gamer-clipart_4120987_45
+  - first:
+      213: 7636153005201528054
+    second: PinClipart.com_gamer-clipart_4120987_46
+  - first:
+      213: -2168710182104393471
+    second: PinClipart.com_gamer-clipart_4120987_47
+  - first:
+      213: -2748143350970781184
+    second: PinClipart.com_gamer-clipart_4120987_48
+  - first:
+      213: -9040533586773737083
+    second: PinClipart.com_gamer-clipart_4120987_49
+  - first:
+      213: 9163374981003101112
+    second: PinClipart.com_gamer-clipart_4120987_50
+  - first:
+      213: 6483371441853576212
+    second: PinClipart.com_gamer-clipart_4120987_51
+  - first:
+      213: 544848561203936994
+    second: PinClipart.com_gamer-clipart_4120987_52
+  - first:
+      213: 8446635819806331585
+    second: PinClipart.com_gamer-clipart_4120987_53
+  - first:
+      213: -934866141475642954
+    second: PinClipart.com_gamer-clipart_4120987_54
+  - first:
+      213: -7586641150213225883
+    second: PinClipart.com_gamer-clipart_4120987_55
+  - first:
+      213: 3753828545258148328
+    second: PinClipart.com_gamer-clipart_4120987_56
+  - first:
+      213: -3549276801100018927
+    second: PinClipart.com_gamer-clipart_4120987_57
+  - first:
+      213: 7777892163305719153
+    second: PinClipart.com_gamer-clipart_4120987_58
+  - first:
+      213: -6314125365521598215
+    second: PinClipart.com_gamer-clipart_4120987_59
+  - first:
+      213: 7145753367501962330
+    second: PinClipart.com_gamer-clipart_4120987_60
+  - first:
+      213: -3155341619756935323
+    second: PinClipart.com_gamer-clipart_4120987_61
+  - first:
+      213: -3636680235798771786
+    second: PinClipart.com_gamer-clipart_4120987_62
+  - first:
+      213: -3286972575983329846
+    second: PinClipart.com_gamer-clipart_4120987_63
+  - first:
+      213: -5226779069089345451
+    second: PinClipart.com_gamer-clipart_4120987_64
+  - first:
+      213: -594550270140789933
+    second: PinClipart.com_gamer-clipart_4120987_65
+  - first:
+      213: -7783639289025061496
+    second: PinClipart.com_gamer-clipart_4120987_66
+  - first:
+      213: 5080845099404447064
+    second: PinClipart.com_gamer-clipart_4120987_67
+  - first:
+      213: 3906127401246842010
+    second: PinClipart.com_gamer-clipart_4120987_68
+  - first:
+      213: 4211094803294588372
+    second: PinClipart.com_gamer-clipart_4120987_69
+  - first:
+      213: -4887924959583319288
+    second: PinClipart.com_gamer-clipart_4120987_70
+  - first:
+      213: -2754727861490477182
+    second: PinClipart.com_gamer-clipart_4120987_71
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 509, z: 311, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 510
+        width: 314
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381b575ed79fc1aa0800000000000000
+      internalID: -6188797468797980285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_1
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 509
+        width: 314
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a8e54536b8fc4120800000000000000
+      internalID: 2399566162943142054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 440
+        width: 314
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 549c112ee07ed1660800000000000000
+      internalID: 7358291417301633349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_3
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 438
+        width: 314
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a665e19dec433bf30800000000000000
+      internalID: 4590070508231218794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 364
+        width: 314
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fa60bfc8cd5513e0800000000000000
+      internalID: -2083656135529698569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_5
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 366
+        width: 314
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55e0a03693cc1ea0800000000000000
+      internalID: -5900626361933830817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 294
+        width: 314
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7938793c35b79f0800000000000000
+      internalID: -469689636604373049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_7
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 294
+        width: 314
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c6a5bcf66a3c9a00800000000000000
+      internalID: 764550250746980040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212
+        width: 314
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 995d0b050b1b2d200800000000000000
+      internalID: 203420304011220377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_9
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 211
+        width: 314
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4dae232a781c58c0800000000000000
+      internalID: -4009302655411245748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 314
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58cec5a951f40b0c0800000000000000
+      internalID: -4562059468323623803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_11
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 141
+        width: 314
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58661a3105c109670800000000000000
+      internalID: 8543359623374136965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 314
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9853ec2e52a5cc780800000000000000
+      internalID: -8661448864574851703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_13
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 68
+        width: 314
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3acb0f8311202f660800000000000000
+      internalID: 7417993809225628835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 314
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e68ed7f3c75fa470800000000000000
+      internalID: 8408035528512800481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PinClipart.com_gamer-clipart_4120987_15
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 0
+        width: 314
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef4bd24ed3f7c7200800000000000000
+      internalID: 179157988985910526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
