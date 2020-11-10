@@ -15,18 +15,12 @@ public class State : ScriptableObject
     [SerializeField] uint keyFrame;
     [SerializeField] uint framesTillKey;
 
-    [Header("Movement")]
-    [SerializeField] public float moveSpeed = 0;
-    [SerializeField] public float jumpVal = 0;
-
-    [Header("Set Axis Movement")]
-    [SerializeField] bool enable = false;
-    [SerializeField] [Range(-1, 1)] public float horizontal = 0;
-    [SerializeField] [Range(-1, 1)] public float vertical = 0;
-
     [Header("Input")]
     [SerializeField] public bool inputOverride = false;
     [SerializeField] public InputKey[] inputKey;
+
+    [Header("Pre-Req")]
+    [SerializeField] public State preReqState;
 
     int index = 0;
     float time = 0;
@@ -72,23 +66,6 @@ public class State : ScriptableObject
         }
 
         return state;
-    }
-
-    public void StateMove(Character chara, float hor, float vert)
-    {
-        if (!enable)
-        {
-            Vector3 temp = new Vector3(hor, 0, vert).normalized;
-
-            chara.transform.position += temp * Time.deltaTime * moveSpeed;
-        }
-        else
-        {
-            Vector2 temp = new Vector2(horizontal, vertical).normalized;
-
-            chara.transform.position += chara.transform.right * temp.x * Time.deltaTime * moveSpeed;
-            chara.transform.position += chara.transform.forward * temp.y * Time.deltaTime * moveSpeed * hor;
-        }
     }
 
     public void Reset()

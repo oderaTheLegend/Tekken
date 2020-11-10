@@ -123,7 +123,7 @@ public class Character : MonoBehaviour
                 }
         }
 
-        current.StateMove(this, horizontal, vertical);
+        //current.StateMove(this, horizontal, vertical);
 
         if (horizontal > 0)
         {

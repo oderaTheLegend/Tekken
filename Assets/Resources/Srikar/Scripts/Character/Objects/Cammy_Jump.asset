@@ -17,6 +17,8 @@ MonoBehaviour:
   - {fileID: 2312223588488037908, guid: d21607353f2da1541abfdbd8f41fea54, type: 3}
   - {fileID: -8370961723893547215, guid: d21607353f2da1541abfdbd8f41fea54, type: 3}
   - {fileID: 2654449616415624094, guid: d21607353f2da1541abfdbd8f41fea54, type: 3}
+  - {fileID: 2562938795253342106, guid: d21607353f2da1541abfdbd8f41fea54, type: 3}
+  - {fileID: -3305157584866645178, guid: d21607353f2da1541abfdbd8f41fea54, type: 3}
   colliders:
   - {fileID: 6534683570427294229, guid: c08471ab652f95d41ac048363f3c1e60, type: 3}
   - {fileID: 6324855721413947446, guid: 6606f22037f07d841b695c6e5151bae0, type: 3}
