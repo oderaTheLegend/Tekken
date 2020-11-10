@@ -13,14 +13,13 @@ public enum FrameState
 public class Character : MonoBehaviour
 {
     [NonSerialized] public SpriteRenderer renderer;
-    [NonSerialized] public Rigidbody2D rigidbody;
+    [NonSerialized] public Rigidbody rigidbody;
 
     [Header("Neutral States")]
     [SerializeField] State idle;
     [SerializeField] State forward;
-    [SerializeField] State backward;
     [SerializeField] State jump;
-    [SerializeField] State crouch;
+    [SerializeField] State falling;
 
     [Header("Action States")]
     [SerializeField] List<State> moveSets;
@@ -29,13 +28,15 @@ public class Character : MonoBehaviour
 
     [Header("Platforming values")]
     [SerializeField] public float jumpHeight;
-    [SerializeField] [Range(-1, 1)] int facing = 1;
+    
+    int horizontal = 0;
+    int vertical = 0;
 
     Vector3 rightFacing;
 
+    bool shouldCheckGround;
     bool grounded;
 
-    public BoxCollider2D[] colliders;
     bool canJump; // delete later
 
     float lastMove;
@@ -43,99 +44,135 @@ public class Character : MonoBehaviour
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody>();
 
         rightFacing = transform.forward;
 
         current = idle;
+
+        shouldCheckGround = true;
     }
 
     private void Update()
     {
-        List<InputKey> input = InputManager.instance.ReturnHistory();
+        List<InputKey> input = InputManager.instance.Inputs();
 
-        GroundCheck();
+        if (shouldCheckGround)
+            GroundCheck();
+
+        if (current.Animate(renderer) == FrameState.Finished && grounded)
+        {
+            current = idle;
+            InputManager.instance.TakeInput = true;
+            InputManager.instance.AddBlankInput();
+        }
 
         if (input.Count > 1)
         {
-            if (input[1].dirKey == DirectionKey.Right)
-            {
-                if (facing > 0)
+            if (grounded)
+                if (!ComboCheck(input))
                 {
-                    if (current != forward)
-                        current = forward;
+                    switch (input[1].dirKey)
+                    {
+                        case DirectionKey.Right:
+                            horizontal = 1;
+                            vertical = 0;
+                            current = forward;
+                            break;
+                        case DirectionKey.UpRight:
+                            horizontal = 1;
+                            vertical = 1;
+                            current = forward;
+                            break;
+                        case DirectionKey.DownRight:
+                            horizontal = 1;
+                            vertical = -1;
+                            current = forward;
+                            break;
+                        case DirectionKey.Left:
+                            horizontal = -1;
+                            vertical = 0;
+                            current = forward;
+                            break;
+                        case DirectionKey.UpLeft:
+                            horizontal = -1;
+                            vertical = 1;
+                            current = forward;
+                            break;
+                        case DirectionKey.DownLeft:
+                            horizontal = -1;
+                            vertical = -1;
+                            current = forward;
+                            break;
+                        case DirectionKey.Up:
+                            horizontal = 0;
+                            vertical = 1;
+                            current = forward;
+                            break;
+                        case DirectionKey.Down:
+                            horizontal = 0;
+                            current = forward;
+                            vertical = -1;
+                            break;
+                        default:
+                            horizontal = 0;
+                            vertical = 0;
+                            current = idle;
+                            break;
+                    }
                 }
-                else
-                {
-                    if (current != backward)
-                        current = backward;
-                }
-            }
-            else if (input[1].dirKey == DirectionKey.Left)
-            {
-                if (facing > 0)
-                {
-                    if (current != backward)
-                        current = backward;
-                }
-                else
-                {
-                    if (current != forward)
-                        current = forward;
-                }
-            }
-            else if (grounded)
-            {
-                if (current != idle)
-                    current = idle;
-            }
-
-            if (input[1].dirKey == DirectionKey.Up)
-            {
-                if (current != jump)
-                    current = jump;
-
-                canJump = true;
-
-                if (canJump)
-                {
-                    rigidbody.velocity = Vector2.up * jumpHeight;
-                    canJump = false;
-                }
-            }
         }
 
-        float move;
-        if (current.Animate(this, out move) == FrameState.Finished)
-            current = idle;
+        current.StateMove(this, horizontal, vertical);
 
-        if (facing > 0)
+        if (horizontal > 0)
         {
             transform.forward = rightFacing;
         }
-        else if (facing < 0)
+        else if (horizontal < 0)
         {
             transform.forward = -rightFacing;
         }
-
-        if (current != jump)
-            lastMove = move;
-
-        transform.position += lastMove * facing * Vector3.right;
     }
 
-    Vector3 Position
+    bool ComboCheck(List<InputKey> input)
     {
-        get { return transform.position; }
-        set { transform.position = value; }
+        for (int i = 0; i < moveSets.Count; i++)
+        {
+            bool check = true;
+            for (int j = 0; j < moveSets[i].inputKey.Length; j++)
+            {
+                if (!moveSets[i].inputKey[j].Compare(input[j + 1]))
+                {
+                    check = false;
+                    break;
+                }
+            }
+
+            if (check && current != moveSets[i])
+            {
+                Debug.Log(current.name);
+                current = moveSets[i];
+                current.Reset();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void GroundCheck()
     {
         grounded = false;
-        if (Physics2D.Raycast(transform.position, -Vector3.up, 0.01f))
+        if (Physics.Raycast(transform.position, -Vector3.up, 0.01037f))
         {
             grounded = true;
         }
+    }
+
+    public bool GroundCheckStall
+    {
+        get { return shouldCheckGround; }
+        set { shouldCheckGround = value; }
     }
 }

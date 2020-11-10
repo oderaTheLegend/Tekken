@@ -9,6 +9,7 @@ public class UIInputKeys : MonoBehaviour
     [SerializeField] Image directionImage;
     [SerializeField] Text lightAttack;
     [SerializeField] Text heavyAttack;
+    [SerializeField] Text jump;
     [SerializeField] Text frames;
 
     [Header("Direction Images")]
@@ -35,6 +36,11 @@ public class UIInputKeys : MonoBehaviour
             heavyAttack.text = "B";
         else
             heavyAttack.text = "";
+
+        if (key.jKey == HitKey.Jump)
+            jump.text = "J";
+        else
+            jump.text = "";
     }
 
     public void FrameUpdate(int frameCount)

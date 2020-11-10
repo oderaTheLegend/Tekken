@@ -14,13 +14,15 @@ public enum DirectionKey
     UpLeft,
     DownRight,
     DownLeft,
+    Any
 }
 
 public enum HitKey
 {
     Null,
     Light,
-    Heavy
+    Heavy,
+    Jump
 }
 
 [Serializable]
@@ -29,24 +31,26 @@ public class InputKey
     public DirectionKey dirKey;
     public HitKey lKey;
     public HitKey hKey;
+    public HitKey jKey;
 
     public InputKey()
     {
         dirKey = DirectionKey.Null;
         lKey = HitKey.Null;
         hKey = HitKey.Null;
-    }
-
-    public InputKey(DirectionKey d, HitKey l, HitKey h)
-    {
-        dirKey = d;
-        lKey = l;
-        hKey = h;
+        jKey = HitKey.Null;
     }
 
     public bool Compare(InputKey key)
     {
-        if (key.dirKey == dirKey && key.lKey == lKey && key.hKey == hKey)
+        if (key.dirKey == DirectionKey.Any || dirKey == DirectionKey.Any)
+        {
+            if (key.lKey == lKey && key.hKey == hKey && key.jKey == jKey)
+                return true;
+            else
+                return false;
+        }
+        else if (key.dirKey == dirKey && key.lKey == lKey && key.hKey == hKey && key.jKey == jKey)
             return true;
         else
             return false;
@@ -74,6 +78,7 @@ public class InputManager : MonoBehaviour
     float vertical;
     float lightAttack;
     float heavyAttack;
+    float jump;
 
     List<InputKey> inputHistory;
     List<int> frameHistory;
@@ -109,6 +114,7 @@ public class InputManager : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
         lightAttack = Input.GetAxisRaw("Fire1");
         heavyAttack = Input.GetAxisRaw("Fire2");
+        jump = Input.GetAxisRaw("Jump");
 
         FightingInput();
     }
@@ -181,7 +187,6 @@ public class InputManager : MonoBehaviour
                     inputHistory[0].lKey = HitKey.Light;
                     currentInput = true;
                 }
-
             }
 
             // Heavy Button Check
@@ -190,6 +195,16 @@ public class InputManager : MonoBehaviour
                 if (heavyAttack > 0)
                 {
                     inputHistory[0].hKey = HitKey.Heavy;
+                    currentInput = true;
+                }
+            }
+
+            // Jump Button Check
+            if (inputHistory[0].jKey == HitKey.Null)
+            {
+                if (jump > 0)
+                {
+                    inputHistory[0].jKey = HitKey.Jump;
                     currentInput = true;
                 }
             }
@@ -241,9 +256,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public List<InputKey> ReturnHistory()
+    public List<InputKey> Inputs()
     {
         return inputHistory;
+    }
+
+    public Vector3 Direction()
+    {
+        return new Vector3(vertical, 0, horizontal);
     }
 
     public int ReturnCurrentFrames()
@@ -255,5 +275,13 @@ public class InputManager : MonoBehaviour
     {
         get { return takeInput; }
         set { takeInput = value; }
+    }
+
+    public void AddBlankInput()
+    {
+        historyUI.AddInput(inputHistory[0]);
+        inputHistory.Insert(0, new InputKey());
+        frameHistory.Insert(0, 0);
+        currentInput = false;
     }
 }
