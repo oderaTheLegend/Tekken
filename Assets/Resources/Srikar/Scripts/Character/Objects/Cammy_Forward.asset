@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a71a9f46a678d6429c3d05168eb8507, type: 3}
+  m_Name: Cammy_Forward
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -5361504528622424717, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 75184573317662114, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 8260432221225239151, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: -1610752373843980768, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 3143642224403221343, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 8051734113126650297, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 6428408052016047933, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: -2696527440870963824, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: -8155648518416258722, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  - {fileID: 8471435514178734586, guid: 44e71d1619ff8cd4fb1b86b251b3eb7e, type: 3}
+  colliders:
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  - {fileID: 4738549647743137266, guid: a72c5786c2eecd543a24f203d49323c4, type: 3}
+  loop: 1
+  keyFrame: 0
+  framesTillKey: 0
+  moveSpeed: 3
+  vertSpeed: 0
+  inputKey: []

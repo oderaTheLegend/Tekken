@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a71a9f46a678d6429c3d05168eb8507, type: 3}
+  m_Name: Cammy_Idle
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1116217438403387717, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  - {fileID: 7853115089692027617, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  - {fileID: -6459104129057896194, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  - {fileID: 771701137705994627, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  - {fileID: 6072916952273528817, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  - {fileID: 5730250923979349143, guid: 9113ca8bd312bb841aa34ef6a65bb8f0, type: 3}
+  colliders:
+  - {fileID: 6534683570427294229, guid: c08471ab652f95d41ac048363f3c1e60, type: 3}
+  - {fileID: 1905595798024981125, guid: 1a9e22efae631dd45ac68c20c5a52394, type: 3}
+  - {fileID: 2292638907768986075, guid: 32a581f93588d5948865ba314885cc04, type: 3}
+  - {fileID: 6534683570427294229, guid: c08471ab652f95d41ac048363f3c1e60, type: 3}
+  - {fileID: 1905595798024981125, guid: 1a9e22efae631dd45ac68c20c5a52394, type: 3}
+  - {fileID: 2292638907768986075, guid: 32a581f93588d5948865ba314885cc04, type: 3}
+  loop: 0
+  keyFrame: 0
+  framesTillKey: 0
+  moveSpeed: 0
+  vertSpeed: 0
+  inputKey: []
