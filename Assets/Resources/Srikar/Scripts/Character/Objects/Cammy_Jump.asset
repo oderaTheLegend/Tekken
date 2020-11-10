@@ -30,14 +30,12 @@ MonoBehaviour:
   loop: 0
   keyFrame: 5
   framesTillKey: 0
-  moveSpeed: 5
-  jumpVal: 4
-  enable: 0
-  horizontal: 0
-  vertical: 0
   inputOverride: 1
   inputKey:
   - dirKey: 9
     lKey: 0
     hKey: 0
     jKey: 3
+  moveAllowed: 1
+  preReqState: {fileID: 0}
+  state: 0

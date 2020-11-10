@@ -20,13 +20,14 @@ public class State : ScriptableObject
     [SerializeField] public InputKey[] inputKey;
 
     [Header("Pre-Req")]
+    [SerializeField] public bool moveAllowed;
     [SerializeField] public State preReqState;
 
     int index = 0;
     float time = 0;
     bool jump = false;
 
-    FrameState state;
+    [NonSerialized] public FrameState state;
 
     bool colliderHit = false;
 
@@ -43,7 +44,6 @@ public class State : ScriptableObject
                 if (index == keyFrame && !loop && colliderHit)
                 {
                     state = FrameState.Cancelled;
-                    InputManager.instance.TakeInput = true;
                 }
 
                 if (index >= sprites.Length)
@@ -75,11 +75,6 @@ public class State : ScriptableObject
         jump = false;
 
         state = FrameState.Running;
-
-        if (!inputOverride)
-        {
-            InputManager.instance.TakeInput = false;
-        }
     }
 
     public void ColliderHit()

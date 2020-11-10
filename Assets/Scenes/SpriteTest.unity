@@ -1031,8 +1031,9 @@ MonoBehaviour:
   idle: {fileID: 11400000, guid: 80e29cb2cfed40349b664b0c010a2421, type: 2}
   forward: {fileID: 11400000, guid: fb8545e9dc4b8e74191469adb77297d9, type: 2}
   jump: {fileID: 11400000, guid: be4d0f0a3319dc0429481b103bfc3a0b, type: 2}
-  fall: {fileID: 11400000, guid: 456e59ab1d0974943a532d2b16dd0b46, type: 2}
-  moveSets: []
+  moveSets:
+  - {fileID: 11400000, guid: 56a6a63229cdbd0438ffadbfd96ad510, type: 2}
+  - {fileID: 11400000, guid: fec421cf1b5b63b458b93da2e6314e7e, type: 2}
 --- !u!212 &1915317384
 SpriteRenderer:
   m_ObjectHideFlags: 0

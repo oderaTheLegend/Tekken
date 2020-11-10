@@ -10,10 +10,7 @@ public class SpriteController : Controller
     [Header("Neutral States")]
     [SerializeField] State idle;
     [SerializeField] State forward;
-
-    [Header("Jump States")]
     [SerializeField] State jump;
-    [SerializeField] State fall;
 
     [Header("Action States")]
     [SerializeField] List<State> moveSets;
@@ -45,7 +42,7 @@ public class SpriteController : Controller
             if (ComboCheck(inputs))
             {
                 combo = true;
-                Debug.Log("Current combo : " + current.name);
+                Debug.Log("Current combo : " + Current.name);
             }
             else
             {
@@ -54,18 +51,14 @@ public class SpriteController : Controller
                 if (inputs[1].jKey == HitKey.Jump)
                 {
                     Jump();
-                    if (current != jump)
-                    {
-                        current = jump;
-                        current.Reset();
-                    }
+                    Current = jump;
                 }
             }
         }
 
         if (current.Animate(renderer) == FrameState.Finished && jumpState == JumpState.Grounded)
         {
-            current = idle;
+            Current = idle;
         }
     }
 
@@ -80,15 +73,18 @@ public class SpriteController : Controller
 
         bool move = false;
 
-        if (!combo)
+        if (!combo && Current.moveAllowed)
             Move(dir, out move);
 
         if (jumpState == JumpState.Grounded)
         {
             if (move)
-                current = forward;
+                Current = forward;
             else
-                current = idle;
+            {
+                if (Current == forward)
+                    current = idle;
+            }
         }
 
         Gravity();
@@ -108,14 +104,29 @@ public class SpriteController : Controller
                 }
             }
 
-            if (check && current != moveSets[i])
+            if (check)
             {
-                current = moveSets[i];
-                current.Reset();
-                return true;
+                if (moveSets[i].preReqState == null)
+                {
+                    current = moveSets[i];
+                    current.Reset();
+                    return true;
+                }
+                else if (current == moveSets[i].preReqState)
+                {
+                    current = moveSets[i];
+                    current.Reset();
+                    return true;
+                }
             }
         }
 
         return false;
+    }
+
+    State Current
+    {
+        get { return current; }
+        set { if (current != value) { current = value; current.Reset(); } }
     }
 }

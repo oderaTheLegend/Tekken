@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a71a9f46a678d6429c3d05168eb8507, type: 3}
-  m_Name: Cammy_Light1
+  m_Name: Cammy_Light2
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 5371304983247038231, guid: a61c04206dbe4524c82218519353857d, type: 3}
-  - {fileID: -2641386884090325776, guid: a61c04206dbe4524c82218519353857d, type: 3}
+  - {fileID: 2081274164660435619, guid: d396a5997e2d29a46b647069ba30f82d, type: 3}
+  - {fileID: -824639048418859493, guid: d396a5997e2d29a46b647069ba30f82d, type: 3}
   colliders: []
   loop: 0
   keyFrame: 0
@@ -26,5 +26,4 @@ MonoBehaviour:
     hKey: 0
     jKey: 0
   moveAllowed: 0
-  preReqState: {fileID: 0}
-  state: 1
+  preReqState: {fileID: 11400000, guid: fec421cf1b5b63b458b93da2e6314e7e, type: 2}
