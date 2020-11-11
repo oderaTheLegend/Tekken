@@ -306,11 +306,6 @@ public class InputManager : MonoBehaviour
         return new Vector3(vertical, 0, horizontal);
     }
 
-    public int ReturnCurrentFrames()
-    {
-        return frameHistory[0];
-    }
-
     public bool TakeInput
     {
         get { return takeInput; }
