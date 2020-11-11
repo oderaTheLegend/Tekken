@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 1915317382}
   - component: {fileID: 1915317381}
   m_Layer: 0
-  m_Name: NewChara
+  m_Name: Cammy!
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6a79c8d71ab3343bdb919fd858bce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airTime: 0.25
+  airTime: 0.3
   jumpHeight: 2
   groundAllowance: 0.01037
   speedUpFactor: 20
@@ -1031,7 +1031,9 @@ MonoBehaviour:
   idle: {fileID: 11400000, guid: 80e29cb2cfed40349b664b0c010a2421, type: 2}
   forward: {fileID: 11400000, guid: fb8545e9dc4b8e74191469adb77297d9, type: 2}
   jump: {fileID: 11400000, guid: be4d0f0a3319dc0429481b103bfc3a0b, type: 2}
+  dirJump: {fileID: 11400000, guid: a6c0334f89148904ab1ce6951e427daa, type: 2}
   moveSets:
+  - {fileID: 11400000, guid: 6b1a49e78e8589c4d848bc64c0224d9a, type: 2}
   - {fileID: 11400000, guid: 56a6a63229cdbd0438ffadbfd96ad510, type: 2}
   - {fileID: 11400000, guid: fec421cf1b5b63b458b93da2e6314e7e, type: 2}
 --- !u!212 &1915317384

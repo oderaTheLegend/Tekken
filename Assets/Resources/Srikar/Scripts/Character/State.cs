@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum ColType
+{
+    Hit,
+    Hurt
+}
+
 [CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/State", order = 1)]
 public class State : ScriptableObject
 {
     [SerializeField] public Sprite[] sprites;
-    [SerializeField] public BoxCollider2D[] colliders;
-
-    [SerializeField] bool loop;
 
     [Header("Frame Details")]
+    [SerializeField] bool loop;
     [SerializeField] uint keyFrame;
     [SerializeField] uint framesTillKey;
+    [SerializeField] float recoveryPeriod;
 
     [Header("Input")]
-    [SerializeField] public bool inputOverride = false;
     [SerializeField] public InputKey[] inputKey;
 
     [Header("Pre-Req")]
@@ -26,31 +30,29 @@ public class State : ScriptableObject
     int index = 0;
     float time = 0;
     bool jump = false;
+    bool finishCheck = false;
 
     [NonSerialized] public FrameState state;
 
     bool colliderHit = false;
 
-    public FrameState Animate(SpriteRenderer renderer)
+    public FrameState Animate(SpriteRenderer renderer, out float recoveryTime)
     {
         time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
 
         if (time > 1)
         {
-            if (state == FrameState.Running)
+            if (state != FrameState.Finished)
             {
-                index += 1;
-
-                if (index == keyFrame && !loop && colliderHit)
-                {
-                    state = FrameState.Cancelled;
-                }
-
                 if (index >= sprites.Length)
                 {
-                    if (!loop)
+                    if (state != FrameState.Looping)
                     {
-                        state = FrameState.Finished;
+                        if (!finishCheck)
+                            finishCheck = true;
+                        else
+                            state = FrameState.Finished;
+
                         index = sprites.Length - 1;
                     }
                     else
@@ -60,10 +62,13 @@ public class State : ScriptableObject
                 }
 
                 renderer.sprite = sprites[index];
+                index += 1;
 
                 time = 0;
             }
         }
+
+        recoveryTime = recoveryPeriod;
 
         return state;
     }
@@ -73,8 +78,13 @@ public class State : ScriptableObject
         time = 0;
         index = 0;
         jump = false;
+        finishCheck = false;
+        colliderHit = false;
 
-        state = FrameState.Running;
+        if (loop)
+            state = FrameState.Looping;
+        else
+            state = FrameState.Running;
     }
 
     public void ColliderHit()

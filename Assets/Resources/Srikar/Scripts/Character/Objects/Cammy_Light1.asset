@@ -15,11 +15,10 @@ MonoBehaviour:
   sprites:
   - {fileID: 5371304983247038231, guid: a61c04206dbe4524c82218519353857d, type: 3}
   - {fileID: -2641386884090325776, guid: a61c04206dbe4524c82218519353857d, type: 3}
-  colliders: []
   loop: 0
   keyFrame: 0
   framesTillKey: 0
-  inputOverride: 0
+  recoveryPeriod: 0.2
   inputKey:
   - dirKey: 9
     lKey: 1
@@ -27,4 +26,3 @@ MonoBehaviour:
     jKey: 0
   moveAllowed: 0
   preReqState: {fileID: 0}
-  state: 1

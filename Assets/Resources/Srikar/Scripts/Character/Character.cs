@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum FrameState
-{
-    Running,
-    Finished,
-    Cancelled
-}
-
 public class Character : MonoBehaviour
 {
     [NonSerialized] public SpriteRenderer renderer;
@@ -60,7 +53,8 @@ public class Character : MonoBehaviour
         if (shouldCheckGround)
             GroundCheck();
 
-        if (current.Animate(renderer) == FrameState.Finished && grounded)
+        float temp;
+        if (current.Animate(renderer, out temp) == FrameState.Finished && grounded)
         {
             current = idle;
             InputManager.instance.TakeInput = true;

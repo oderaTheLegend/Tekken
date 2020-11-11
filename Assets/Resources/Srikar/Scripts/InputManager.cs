@@ -81,6 +81,7 @@ public class InputManager : MonoBehaviour
     float jump;
 
     List<InputKey> inputHistory;
+
     List<int> frameHistory;
     bool currentInput;
     float time = 0;
@@ -217,10 +218,21 @@ public class InputManager : MonoBehaviour
                 if (!inputHistory[0].Compare(inputHistory[1]))
                 {
                     historyUI.AddInput(inputHistory[0]);
+
                     inputHistory.Insert(0, new InputKey());
+
                     frameHistory.Insert(0, 0);
                     currentInput = false;
                 }
+                //else if (frameHistory[0] >= inputFrameGap)
+                //{
+                //    inputHistory.Insert(0, new InputKey());
+                //
+                //    frameHistory.Insert(0, 0);
+                //    //frameHistory[0] += frameHistory[1];
+                //
+                //    //currentInput = false;
+                //}
                 else
                 {
                     inputHistory[0] = new InputKey();
@@ -259,6 +271,16 @@ public class InputManager : MonoBehaviour
     public List<InputKey> Inputs()
     {
         return inputHistory;
+    }
+
+    public List<int> Frames()
+    {
+        return frameHistory;
+    }
+
+    public int FrameGap()
+    {
+        return inputFrameGap;
     }
 
     public Vector3 Direction()
