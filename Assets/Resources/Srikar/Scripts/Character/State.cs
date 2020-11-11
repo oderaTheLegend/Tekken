@@ -17,8 +17,8 @@ public class State : ScriptableObject
     [Header("Frame Details")]
     [SerializeField] bool loop;
     [SerializeField] uint keyFrame;
-    [SerializeField] uint framesTillKey;
     [SerializeField] float recoveryPeriod;
+    [SerializeField] bool hasHit;
 
     [Header("Input")]
     [SerializeField] public InputKey[] inputKey;
@@ -44,6 +44,12 @@ public class State : ScriptableObject
         {
             if (state != FrameState.Finished)
             {
+                if (index == keyFrame + 1 && colliderHit && hasHit)
+                {
+                    index = (int)keyFrame;
+                    colliderHit = false;
+                }
+
                 if (index >= sprites.Length)
                 {
                     if (state != FrameState.Looping)
@@ -90,5 +96,10 @@ public class State : ScriptableObject
     public void ColliderHit()
     {
         colliderHit = true;
+    }
+
+    public bool HasHitCollider
+    {
+        get { return hasHit; }
     }
 }

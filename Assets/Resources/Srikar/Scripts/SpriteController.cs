@@ -21,11 +21,13 @@ public class SpriteController : Controller
     [SerializeField] State dirJump;
 
     [Header("Action States")]
+    [SerializeField] float comboSetTime = 0.2f;
     [SerializeField] List<State> moveSets;
 
     Vector3 facing;
     State current;
     State buffer = null;
+    float bufferTimer = 0;
 
     bool combo;
     bool changeState = true;
@@ -52,13 +54,23 @@ public class SpriteController : Controller
             // Checks for combo or action states
             if (changeState)
             {
-                buffer = ComboCheck(inputs, frames);
+                State temp = ComboCheck(inputs, frames);
+
+                if (temp != null)
+                {
+                    buffer = temp;
+                    bufferTimer = 0;
+                }
 
                 if (buffer == current)
                     buffer = null;
 
                 if (buffer != null)
                     combo = true;
+                else
+                {
+                    bufferTimer = 0;
+                }
             }
 
             if (current == idle || current == forward)
@@ -80,15 +92,20 @@ public class SpriteController : Controller
 
         float recTime;
         FrameState stateCheck = current.Animate(renderer, out recTime);
+        
+        bufferTimer += Time.deltaTime;
 
         if (stateCheck != FrameState.Running)
         {
-            if (buffer != null)
+            if (buffer != null && bufferTimer <= comboSetTime)
             {
                 current = buffer;
                 current.Reset();
                 Debug.Log("Current combo : " + Current.name);
                 combo = true;
+
+                buffer = null;
+                bufferTimer = 0;
             }
             else if (stateCheck == FrameState.Finished)
             {
@@ -107,10 +124,13 @@ public class SpriteController : Controller
     {
         Vector3 dir = InputManager.instance.Direction();
 
-        if (dir.z > 0)
-            transform.forward = facing;
-        else if (dir.z < 0)
-            transform.forward = -facing;
+        if (!combo)
+        {
+            if (dir.z > 0)
+                transform.forward = facing;
+            else if (dir.z < 0)
+                transform.forward = -facing;
+        }
 
         bool move = false;
 
