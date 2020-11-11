@@ -26,9 +26,11 @@ MonoBehaviour:
   - {fileID: 6534683570427294229, guid: c08471ab652f95d41ac048363f3c1e60, type: 3}
   - {fileID: 1905595798024981125, guid: 1a9e22efae631dd45ac68c20c5a52394, type: 3}
   - {fileID: 2292638907768986075, guid: 32a581f93588d5948865ba314885cc04, type: 3}
-  loop: 0
+  loop: 1
   keyFrame: 0
   framesTillKey: 0
-  moveSpeed: 0
-  vertSpeed: 0
+  inputOverride: 1
   inputKey: []
+  moveAllowed: 1
+  preReqState: {fileID: 0}
+  state: 0

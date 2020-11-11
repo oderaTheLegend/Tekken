@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a71a9f46a678d6429c3d05168eb8507, type: 3}
+  m_Name: Cammy_DirJump
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 4207523259806622037, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: -8002260793320796351, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: -2142139116968268990, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: -8271629370669874424, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: -6431329814468650593, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: 5912187928324409621, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  - {fileID: 7598964312773192906, guid: e00ce5533db7a5c409d8999680ea5150, type: 3}
+  colliders: []
+  loop: 0
+  keyFrame: 0
+  framesTillKey: 0
+  recoveryPeriod: 0
+  inputKey: []
+  moveAllowed: 0
+  preReqState: {fileID: 0}

@@ -70,7 +70,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Launcher:OnConnectedToMaster() was called by PUN");
+        //Debug.Log("Launcher:OnConnectedToMaster() was called by PUN");
         // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
         PhotonNetwork.JoinRandomRoom();
     }
@@ -78,12 +78,12 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.LogWarningFormat("Launcher:OnDisconnected() was called by PUN with reason {0}", cause);
+        //Debug.LogWarningFormat("Launcher:OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        //Debug.Log("Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
         PhotonNetwork.CreateRoom(null, new RoomOptions());
@@ -91,7 +91,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        //Debug.Log("Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
     }
 
     #endregion

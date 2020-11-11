@@ -4,65 +4,78 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 
+public enum ColType
+{
+    Hit,
+    Hurt
+}
+
 [CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/State", order = 1)]
 public class State : ScriptableObject
 {
     [SerializeField] public Sprite[] sprites;
-    [SerializeField] public BoxCollider2D[] colliders;
-
-    [SerializeField] bool loop;
 
     [Header("Frame Details")]
+    [SerializeField] bool loop;
     [SerializeField] uint keyFrame;
-    [SerializeField] uint framesTillKey;
-
-    [Header("Movement")]
-    [SerializeField] public float moveSpeed = 0;
-    [SerializeField] public float vertSpeed = 0;
+    [SerializeField] float recoveryPeriod;
+    [SerializeField] bool hasHit;
 
     [Header("Input")]
     [SerializeField] public InputKey[] inputKey;
 
+    [Header("Pre-Req")]
+    [SerializeField] public bool moveAllowed;
+    [SerializeField] public State preReqState;
+
     int index = 0;
     float time = 0;
+    bool jump = false;
+    bool finishCheck = false;
 
-    FrameState state;
+    [NonSerialized] public FrameState state;
 
-    bool vertApplied = false;
+    bool colliderHit = false;
 
-    public FrameState Animate(Character chara, out float horizontal)
+    public FrameState Animate(SpriteRenderer renderer, out float recoveryTime)
     {
-        state = FrameState.Running;
         time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
 
         if (time > 1)
         {
-            index += 1;
-
-            if (index == keyFrame + 1 && !loop)
-                state = FrameState.Cancelled;
-
-            if (index >= sprites.Length)
+            if (state != FrameState.Finished)
             {
-                index = 0;
-                vertApplied = false;
+                if (index == keyFrame + 1 && colliderHit && hasHit)
+                {
+                    index = (int)keyFrame;
+                    colliderHit = false;
+                }
 
-                if (!loop)
-                    state = FrameState.Finished;
+                if (index >= sprites.Length)
+                {
+                    if (state != FrameState.Looping)
+                    {
+                        if (!finishCheck)
+                            finishCheck = true;
+                        else
+                            state = FrameState.Finished;
+
+                        index = sprites.Length - 1;
+                    }
+                    else
+                    {
+                        index = 0;
+                    }
+                }
+
+                renderer.sprite = sprites[index];
+                index += 1;
+
+                time = 0;
             }
-
-            chara.renderer.sprite = sprites[index];
-
-            for (int i = 0; i < chara.colliders.Length; i++)
-            {
-                chara.colliders[i].offset = colliders[index].offset;
-                chara.colliders[i].size = colliders[index].size;
-            }
-
-            time = 0;
         }
 
-        horizontal = moveSpeed * Time.deltaTime;
+        recoveryTime = recoveryPeriod;
 
         return state;
     }
@@ -70,5 +83,24 @@ public class State : ScriptableObject
     public void Reset()
     {
         time = 0;
+        index = 0;
+        jump = false;
+        finishCheck = false;
+        colliderHit = false;
+
+        if (loop)
+            state = FrameState.Looping;
+        else
+            state = FrameState.Running;
+    }
+
+    public void ColliderHit()
+    {
+        colliderHit = true;
+    }
+
+    public bool HasHitCollider
+    {
+        get { return hasHit; }
     }
 }

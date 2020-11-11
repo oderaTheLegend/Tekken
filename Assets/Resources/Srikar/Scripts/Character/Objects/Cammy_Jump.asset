@@ -31,6 +31,7 @@ MonoBehaviour:
   loop: 0
   keyFrame: 0
   framesTillKey: 0
-  moveSpeed: 0
-  vertSpeed: 5
-  index: 6
+  recoveryPeriod: 0
+  inputKey: []
+  moveAllowed: 1
+  preReqState: {fileID: 0}

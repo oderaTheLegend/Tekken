@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a71a9f46a678d6429c3d05168eb8507, type: 3}
+  m_Name: Cammy_Light1
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 5371304983247038231, guid: a61c04206dbe4524c82218519353857d, type: 3}
+  - {fileID: -2641386884090325776, guid: a61c04206dbe4524c82218519353857d, type: 3}
+  loop: 0
+  keyFrame: 0
+  framesTillKey: 0
+  recoveryPeriod: 0.2
+  inputKey:
+  - dirKey: 9
+    lKey: 1
+    hKey: 0
+    jKey: 0
+  moveAllowed: 0
+  preReqState: {fileID: 0}
