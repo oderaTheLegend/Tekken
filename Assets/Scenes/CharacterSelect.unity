@@ -1194,6 +1194,7 @@ MonoBehaviour:
   - {fileID: 1836656003}
   - {fileID: 1293837413}
   selectManager: {fileID: 1689444614}
+  slot: {fileID: 2105438818}
 --- !u!114 &359449416
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +45,23 @@ public class SpriteController : Controller
     // Update is called once per frame
     void Update()
     {
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            if (photonView.IsMine)
+            {
+                UpdateMovement();
+            }
+        }
+        else
+        {
+            UpdateMovement();
+        }
+
+    }
+
+    void UpdateMovement()
+    {
+
         GroundCheck();
 
         List<InputKey> inputs = InputManager.instance.Inputs();
@@ -92,7 +110,7 @@ public class SpriteController : Controller
 
         float recTime;
         FrameState stateCheck = current.Animate(renderer, out recTime);
-        
+
         bufferTimer += Time.deltaTime;
 
         if (stateCheck != FrameState.Running)
@@ -114,13 +132,13 @@ public class SpriteController : Controller
             }
         }
 
-        if ( (current == jump || current == dirJump) && jumpState == JumpState.Grounded)
+        if ((current == jump || current == dirJump) && jumpState == JumpState.Grounded)
         {
             Current = idle;
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdateMovement()
     {
         Vector3 dir = InputManager.instance.Direction();
 
@@ -149,6 +167,21 @@ public class SpriteController : Controller
         }
 
         Gravity();
+    }
+
+    private void FixedUpdate()
+    {
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            if (photonView.IsMine)
+            {
+                FixedUpdateMovement();
+            }
+        }
+        else
+        {
+            FixedUpdateMovement();
+        }
     }
 
     State ComboCheck(List<InputKey> input, List<int> frame)

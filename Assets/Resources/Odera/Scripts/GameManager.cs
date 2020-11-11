@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject commonItems;
     public GameObject networkingItems;
-    public GameObject mainCanvas;
     public GameObject fadeCanvas;
 
     public Text player1Nickname, player2Nickname;
@@ -18,12 +17,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-       PhotonNetwork.Instantiate("Player", new Vector3(0, 0.0147f, 0), Quaternion.identity, 0);
+       PhotonNetwork.Instantiate("Cammy!", new Vector3(0, 0.0147f, 0), Quaternion.identity, 0);
 
         p1 = PhotonNetwork.LocalPlayer;
         p2 = PhotonNetwork.LocalPlayer.GetNext();
 
-        UIJuice.instance.GroupAlphaLerp(mainCanvas.GetComponent<CanvasGroup>(), 1, 1);
         UIJuice.instance.GroupAlphaLerp(fadeCanvas.GetComponent<CanvasGroup>(), 0, 1);
 
         commonItems.SetActive(true);
@@ -52,6 +50,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        base.OnDisconnected(cause);
+       // Destroy(PhotonNetwork.Destroy(photonView));
     }
 }
