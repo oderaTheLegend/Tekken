@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 
 [CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/State", order = 1)]
 public class State : ScriptableObject
@@ -33,15 +34,6 @@ public class State : ScriptableObject
     {
         state = FrameState.Running;
         time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
-
-        //if (!vertApplied)
-        //{
-        //    float gravity = 2 * chara.jumpHeight / (sprites.Length * AnimationMaster.instance.AnimFrames * sprites.Length * AnimationMaster.instance.AnimFrames);
-        //    chara.rigidbody.gravityScale = gravity;
-        //
-        //    chara.rigidbody.AddForce(2 * gravity * Vector3.up, ForceMode2D.Impulse);
-        //    vertApplied = true;
-        //}
 
         if (time > 1)
         {

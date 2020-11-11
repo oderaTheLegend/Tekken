@@ -25,7 +25,6 @@ public class UIJuice : MonoBehaviour
 
         StartCoroutine(GroupAlphaLerpRoutine(group, alpha, time));
     }
-
     IEnumerator GroupAlphaLerpRoutine(CanvasGroup group, float alpha, float time)
     {
         float temp = 0;

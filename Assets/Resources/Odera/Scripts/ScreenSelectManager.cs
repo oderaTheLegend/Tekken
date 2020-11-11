@@ -1,12 +1,26 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class ScreenSelectManager : MonoBehaviour
+public static class Mode
 {
-    public enum Mode { Training, Online }
-    public Mode mode;
+    public enum Modes { Training, Online }
+    public static Modes mode;
+
+    public static int currentP1Name;
+    public static int currentP2Name;
+}
+
+public class ScreenSelectManager : MonoBehaviourPunCallbacks
+{
+    public Sprite dummy;
+    public Image dummyImage;
 
     public List<Sprite> characterSprite;
     public List<Sprite> characterLogo;
@@ -19,160 +33,179 @@ public class ScreenSelectManager : MonoBehaviour
     public Text[] playerNames;
 
     public Image versus;
+    public Image partner;
 
     [Tooltip("This is the square select thing. (Play the game, you'll see)")]
     public GameObject slotPos;
+    public GameObject fadeCanvas;
 
     [HideInInspector]
-    public int currentCharacter;
+    public int p1CharacterCurrent;
+    [HideInInspector]
+    public int p2CharacterCurrent;
 
-    [Tooltip("Just a value to keep track of the random character number")]
-    int randomPCharacter;
+    public Text disconnectedText;
 
-    [Tooltip("Just a value to keep track of the random character number")]
-    int randomECharacter;
+    public bool canSelectP1;
+    public bool canSelectP2;
 
-    [Tooltip("This is how long randomization lasts")]
-    float tickTime = 5;
-
-    [Tooltip("Begin picking random character")]
-    bool startRandomize;
-    bool enemySelected;
-
-    [Tooltip("Use this int as the playable character")]
-    public static int chosenCharacter;
-
-    [Tooltip("Character enemy chose for randomization")]
-    public static int enemyChosenCharacter;
-
-    [Tooltip("Just to set CPU info in the beginning")]
-    int x = 0;
+    public static ScreenSelectManager i;
 
     private void Start()
     {
-        currentCharacter = 0;
+        i = this;;
+
+        if (fadeCanvas != null)
+        {
+            UIJuice.instance.GroupAlphaLerp(fadeCanvas.GetComponent<CanvasGroup>(), 1, 2);
+        }
+
+        disconnectedText.text = "";
+        p1CharacterCurrent = 0;
+        p2CharacterCurrent = 0;
+
+        Hashtable props = new Hashtable { { InGame.playerLoaded, true } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                playerNames[0].text = "P2 Deciding";
+            }
+            else
+            {
+                playerNames[1].text = "P1 Deciding";
+            }
+        }
     }
 
     private void Update()
     {
         PlayerDetails();
         ChooseCharacter();
-        ChooseRandom();
         GameMode();
     }
 
-    /*Functions*/
-    #region
+    #region Photon
+
+    public override void OnLeftRoom()
+    {
+        Hashtable props = new Hashtable
+            {
+                {InGame.playerDisconnected, true}
+            };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        DisconnectPlayers();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    private bool DisconnectPlayers()
+    {
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+            object playerDisconnected;
+
+            if (p.CustomProperties.TryGetValue(InGame.playerDisconnected, out playerDisconnected))
+            {
+                if (!(bool)playerDisconnected)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        StartCoroutine(Disconnected());
+        return true;
+    }
+    #endregion
+
+    #region Functions
     void PlayerDetails()
     {
-        playerImages[0].sprite = characterSprite[currentCharacter];
-        playerNames[0].text = characterName[currentCharacter];
-    }
+        if (Mode.mode == Mode.Modes.Training)
+        {
+            playerImages[1].sprite = characterSprite[p1CharacterCurrent];
+            playerNames[1].text = characterName[p1CharacterCurrent];
+        }
+    }  
 
     public void ChooseCharacter()
     {
         //Keyboard Input
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Mode.mode == Mode.Modes.Training)
         {
-            if (playerNames[0].text == "Random")
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                tickTime = 5;
-                startRandomize = true;
-            }
-            else
-            {
-                enemySelected = true;
                 SpriteLogoSlot.selected = true;
 
-                StartCoroutine(Fade(false));
+                StartCoroutine(FadeVersus(false));
 
-                chosenCharacter = currentCharacter;
-                playableCharacter.Add(characterName[chosenCharacter]);
+                playableCharacter.Add(characterName[p1CharacterCurrent]);
 
                 if (playableCharacter.Count >= 2)
                 {
                     playableCharacter.RemoveAt(0);
                 }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (playableCharacter.Count == 1)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                tickTime = 5;
-                SpriteLogoSlot.selected = false;
-                StartCoroutine(Fade(true));
-                playableCharacter.RemoveAt(0);
-            }
-        }
-    }
-
-    void ChooseRandom()
-    {
-        if (startRandomize)
-        {
-            tickTime -= 5 * Time.deltaTime;
-
-            if (tickTime > 0)
-            {
-                randomPCharacter = Random.Range(0, 3);
-                currentCharacter = randomPCharacter;
-            }
-            else
-            {
-                enemySelected = true;
-                tickTime = 5;
-                chosenCharacter = randomPCharacter;
-                startRandomize = false;
-                SpriteLogoSlot.selected = true;
-                StartCoroutine(Fade(false));
-
-                playableCharacter.Add(characterName[chosenCharacter]);
-
-                if (playableCharacter.Count == 2)
+                if (playableCharacter.Count == 1)
                 {
+                    StopAllCoroutines();
+                    SpriteLogoSlot.selected = false;
+                    StartCoroutine(FadeVersus(true));
                     playableCharacter.RemoveAt(0);
                 }
             }
-        }       
+
+            StartCoroutine(EnterLevel(2));
+        }
     }
 
     void GameMode()
     {
-        if (mode == Mode.Training)
+        if (Mode.mode == Mode.Modes.Training)
         {
-            if (enemySelected)
-            {
-                tickTime -= 5 * Time.deltaTime;
-
-                if (tickTime > 0)
-                {
-                    x = 1;
-                    randomECharacter = Random.Range(0, 3);
-                    enemyChosenCharacter = randomECharacter;
-                }
-                else
-                {
-                    tickTime = 0;
-                    enemySelected = false;
-                    enemyChosenCharacter = randomECharacter;
-                }
-            }
-
-            if (x != 1)
-            {
-                playerImages[1].sprite = characterSprite[3];
-                playerNames[1].text = "Pick Your Fighter!";
-                return;
-            }
-
-            playerImages[1].sprite = characterSprite[enemyChosenCharacter];
-            playerNames[1].text = characterName[enemyChosenCharacter];
+            playerNames[0].text = "Training Dummy";
+            dummyImage.sprite = dummy;
         }
     }
 
-    IEnumerator Fade(bool fadeAway)
+    IEnumerator Disconnected()
+    {
+        disconnectedText.text = "Sorry, the other player disconnected. Returning to main menu...";
+        yield return new WaitForSeconds(3);
+        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.Disconnect();
+    }
+
+    IEnumerator EnterLevel(int level)
+    {
+        yield return new WaitForSeconds(4);
+
+        if (SpriteLogoSlot.selected)
+        {
+            UIJuice.instance.GroupAlphaLerp(fadeCanvas.GetComponent<CanvasGroup>(), 0, 0.75f);
+            yield return new WaitForSeconds(3.5f);
+            SceneManager.LoadScene(level);
+        }
+    }
+
+    IEnumerator FadeVersus(bool fadeAway)
     {
         if (fadeAway)
         {
@@ -192,5 +225,5 @@ public class ScreenSelectManager : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion Functions
 }

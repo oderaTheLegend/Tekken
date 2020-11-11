@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 
 public enum FrameState
 {
@@ -10,7 +11,7 @@ public enum FrameState
     Cancelled
 }
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviourPun
 {
     [NonSerialized] public SpriteRenderer renderer;
     [NonSerialized] public Rigidbody2D rigidbody;
@@ -51,6 +52,21 @@ public class Character : MonoBehaviour
     }
 
     private void Update()
+    {   
+        if(Mode.mode == Mode.Modes.Online)
+        {
+            if (photonView.IsMine)
+            {
+                Movement();
+            }
+        }
+        else
+        {
+            Movement();
+        }              
+    }
+
+    void Movement()
     {
         List<InputKey> input = InputManager.instance.ReturnHistory();
 

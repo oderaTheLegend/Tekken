@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,7 +42,7 @@ public class PushDown : MonoBehaviour
     private void Init()
     {
         startMenu.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);     
         //lobbyMenu.gameObject.SetActive(false);
         //characterMenu.gameObject.SetActive(false);
     }
@@ -57,16 +59,6 @@ public class PushDown : MonoBehaviour
 
     public void PopUpBack(string str)
     { if (!busy) StartCoroutine(PopUpBackRoutine(str)); }
-
-    public void LoadCharacterSelect() {
-        popUp.SelectLevel();
-        StartCoroutine(StartCharacterSelect());
-    }
-
-    IEnumerator StartCharacterSelect() {
-        yield return new WaitForSeconds(0.2f);
-        SceneManager.LoadScene(1);
-    }
 
     IEnumerator PushRoutine(GameState state)
     {
