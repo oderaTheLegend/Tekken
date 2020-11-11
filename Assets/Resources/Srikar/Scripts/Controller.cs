@@ -94,10 +94,7 @@ public abstract class Controller : MonoBehaviour
     /// </summary>
     protected virtual void Jump()
     {
-        if (jumpState == JumpState.Grounded)
-        {
-            StartCoroutine(JumpCoroutine());
-        }
+        StartCoroutine(JumpCoroutine());
     }
 
     /// <summary>

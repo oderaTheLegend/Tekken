@@ -29,10 +29,8 @@ MonoBehaviour:
   loop: 1
   keyFrame: 0
   framesTillKey: 0
-  moveSpeed: 0
-  jumpVal: 0
-  enable: 0
-  horizontal: 0
-  vertical: 0
   inputOverride: 1
   inputKey: []
+  moveAllowed: 1
+  preReqState: {fileID: 0}
+  state: 0

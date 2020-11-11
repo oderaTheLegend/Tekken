@@ -81,10 +81,15 @@ public class InputManager : MonoBehaviour
     float jump;
 
     List<InputKey> inputHistory;
+
     List<int> frameHistory;
     bool currentInput;
     float time = 0;
     bool takeInput = true;
+
+    bool lVal;
+    bool hVal;
+    bool jVal;
 
     private void Awake()
     {
@@ -105,6 +110,10 @@ public class InputManager : MonoBehaviour
         frameHistory.Add(0);
         historyUI.AddInput(inputHistory[0]);
         currentInput = false;
+
+        lVal = false;
+        hVal = false;
+        jVal = false;
     }
 
     // Update is called once per frame
@@ -128,6 +137,7 @@ public class InputManager : MonoBehaviour
             frameHistory[0] += 1;
             time = 0;
         }
+
         historyUI.UpdateCurrentFrames(frameHistory[0]);
 
         if (takeInput)
@@ -182,9 +192,15 @@ public class InputManager : MonoBehaviour
             // Light Button Check
             if (inputHistory[0].lKey == HitKey.Null)
             {
-                if (lightAttack > 0)
+                if (lightAttack > 0 && !lVal)
                 {
+                    lVal = true;
                     inputHistory[0].lKey = HitKey.Light;
+                    currentInput = true;
+                }
+                else if (lightAttack == 0 && lVal)
+                {
+                    lVal = false;
                     currentInput = true;
                 }
             }
@@ -192,9 +208,15 @@ public class InputManager : MonoBehaviour
             // Heavy Button Check
             if (inputHistory[0].hKey == HitKey.Null)
             {
-                if (heavyAttack > 0)
+                if (heavyAttack > 0 && !hVal)
                 {
+                    hVal = true;
                     inputHistory[0].hKey = HitKey.Heavy;
+                    currentInput = true;
+                }
+                else if (heavyAttack == 0 && hVal)
+                {
+                    hVal = false;
                     currentInput = true;
                 }
             }
@@ -202,9 +224,15 @@ public class InputManager : MonoBehaviour
             // Jump Button Check
             if (inputHistory[0].jKey == HitKey.Null)
             {
-                if (jump > 0)
+                if (jump > 0 && !jVal)
                 {
+                    jVal = true;
                     inputHistory[0].jKey = HitKey.Jump;
+                    currentInput = true;
+                }
+                else if (jump == 0 && jVal)
+                {
+                    jVal = false;
                     currentInput = true;
                 }
             }
@@ -217,7 +245,9 @@ public class InputManager : MonoBehaviour
                 if (!inputHistory[0].Compare(inputHistory[1]))
                 {
                     historyUI.AddInput(inputHistory[0]);
+
                     inputHistory.Insert(0, new InputKey());
+
                     frameHistory.Insert(0, 0);
                     currentInput = false;
                 }
@@ -259,6 +289,16 @@ public class InputManager : MonoBehaviour
     public List<InputKey> Inputs()
     {
         return inputHistory;
+    }
+
+    public List<int> Frames()
+    {
+        return frameHistory;
+    }
+
+    public int FrameGap()
+    {
+        return inputFrameGap;
     }
 
     public Vector3 Direction()
