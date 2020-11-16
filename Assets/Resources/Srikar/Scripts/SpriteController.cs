@@ -2,44 +2,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public enum FrameState
+public enum InputState
 {
-    Running,
-    Finished,
-    Looping
+    Neutral,
+    Combo,
+    Recovery
 }
 
 public class SpriteController : Controller
 {
     //[Header("Animator Variables")]
     SpriteRenderer renderer;
+    Animator anim;
 
-    [Header("Neutral States")]
-    [SerializeField] State idle;
-    [SerializeField] State forward;
-    [SerializeField] State jump;
-    [SerializeField] State dirJump;
-
-    [Header("Action States")]
     [SerializeField] float comboSetTime = 0.2f;
-    [SerializeField] List<State> moveSets;
+
+    [Header("Specified Inputs")]
+    [SerializeField] InputKey lightAttack; 
 
     Vector3 facing;
-    State current;
-    State buffer = null;
-    float bufferTimer = 0;
 
-    bool combo;
-    bool changeState = true;
+    InputState inputState;
 
     protected override void Start()
     {
         base.Start();
 
+        anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
-        Current = idle;
         facing = transform.forward;
+        inputState = InputState.Neutral;
     }
 
     // Update is called once per frame
@@ -61,7 +55,6 @@ public class SpriteController : Controller
 
     void UpdateMovement()
     {
-
         GroundCheck();
 
         List<InputKey> inputs = InputManager.instance.Inputs();
@@ -70,71 +63,20 @@ public class SpriteController : Controller
         if (inputs.Count > 1)
         {
             // Checks for combo or action states
-            if (changeState)
+            if (inputState != InputState.Combo)
             {
-                State temp = ComboCheck(inputs, frames);
-
-                if (temp != null)
-                {
-                    buffer = temp;
-                    bufferTimer = 0;
-                }
-
-                if (buffer == current)
-                    buffer = null;
-
-                if (buffer != null)
-                    combo = true;
-                else
-                {
-                    bufferTimer = 0;
-                }
+                ComboCheck(inputs, frames);
             }
 
-            if (current == idle || current == forward)
+            if (inputState == InputState.Neutral)
             {
-                combo = false;
                 // Otherwise executes neutral/jump states
                 if (inputs[1].jKey == HitKey.Jump && jumpState == JumpState.Grounded)
                 {
-                    if (current == idle)
-                        current = jump;
-                    if (current == forward)
-                        current = dirJump;
-
-                    current.Reset();
+                    anim.SetTrigger("Jump");
                     Jump();
                 }
             }
-        }
-
-        float recTime;
-        FrameState stateCheck = current.Animate(renderer, out recTime);
-
-        bufferTimer += Time.deltaTime;
-
-        if (stateCheck != FrameState.Running)
-        {
-            if (buffer != null && bufferTimer <= comboSetTime)
-            {
-                current = buffer;
-                current.Reset();
-                Debug.Log("Current combo : " + Current.name);
-                combo = true;
-
-                buffer = null;
-                bufferTimer = 0;
-            }
-            else if (stateCheck == FrameState.Finished)
-            {
-                StartCoroutine(RecoveryWaiter(recTime));
-                Current = idle;
-            }
-        }
-
-        if ((current == jump || current == dirJump) && jumpState == JumpState.Grounded)
-        {
-            Current = idle;
         }
     }
 
@@ -142,7 +84,7 @@ public class SpriteController : Controller
     {
         Vector3 dir = InputManager.instance.Direction();
 
-        if (!combo)
+        if (inputState == InputState.Neutral)
         {
             if (dir.z > 0)
                 transform.forward = facing;
@@ -152,19 +94,18 @@ public class SpriteController : Controller
 
         bool move = false;
 
-        if (!combo && Current.moveAllowed)
+        if (inputState == InputState.Neutral)
             Move(dir, out move);
 
+        if (move)
+            anim.SetBool("Walk", true);
+        else
+            anim.SetBool("Walk", false);
+
         if (jumpState == JumpState.Grounded)
-        {
-            if (move)
-                Current = forward;
-            else
-            {
-                if (Current == forward)
-                    current = idle;
-            }
-        }
+            anim.SetBool("Grounded", false);
+        else
+            anim.SetBool("Grounded", false);
 
         Gravity();
     }
@@ -184,49 +125,38 @@ public class SpriteController : Controller
         }
     }
 
-    State ComboCheck(List<InputKey> input, List<int> frame)
+    void ComboCheck(List<InputKey> input, List<int> frames)
     {
         int frameGap = InputManager.instance.FrameGap();
 
-        for (int i = 0; i < moveSets.Count; i++)
+        if (input[1].Compare(lightAttack))
         {
-            bool check = true;
-            for (int j = 0; j < moveSets[i].inputKey.Length; j++)
+            if (inputState == InputState.Neutral)
             {
-                if (!moveSets[i].inputKey[j].Compare(input[j + 1]) || frame[j] > frameGap)
-                {
-                    check = false;
-                    break;
-                }
+                inputState = InputState.Combo;
+                anim.SetTrigger("Light");
             }
+            else 
+            { 
 
-            if (check)
-            {
-                if (moveSets[i].preReqState == null)
-                {
-                    if (current == idle || current == forward)
-                        return moveSets[i];
-                }
-                else if (current == moveSets[i].preReqState)
-                {
-                    return moveSets[i];
-                }
             }
         }
-
-        return null;
     }
 
-    State Current
+    public void WaitResetInputState(float time)
     {
-        get { return current; }
-        set { if (current != value) { current = value; current.Reset(); } }
+        StartCoroutine(RecoveryWaiter(time));
     }
 
-    IEnumerator RecoveryWaiter(float t)
+    public void HardResetInputState()
     {
-        changeState = false;
-        yield return new WaitForSeconds(t);
-        changeState = true;
+        inputState = InputState.Neutral;
+    }
+
+    IEnumerator RecoveryWaiter(float time)
+    {
+        inputState = InputState.Recovery;
+        yield return new WaitForSeconds(time);
+        inputState = InputState.Neutral;
     }
 }

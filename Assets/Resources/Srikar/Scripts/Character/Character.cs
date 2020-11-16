@@ -53,13 +53,13 @@ public class Character : MonoBehaviour
         if (shouldCheckGround)
             GroundCheck();
 
-        float temp;
-        if (current.Animate(renderer, out temp) == FrameState.Finished && grounded)
-        {
-            current = idle;
-            InputManager.instance.TakeInput = true;
-            InputManager.instance.AddBlankInput();
-        }
+        //float temp;
+        //if (current.Animate(renderer, out temp) == FrameState.Finished && grounded)
+        //{
+        //    current = idle;
+        //    InputManager.instance.TakeInput = true;
+        //    InputManager.instance.AddBlankInput();
+        //}
 
         if (input.Count > 1)
         {
