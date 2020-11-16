@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-       PhotonNetwork.Instantiate("Cammy!", new Vector3(0, 0.0147f, 0), Quaternion.identity, 0);
+       PhotonNetwork.Instantiate("Cammy!", new Vector3(Random.Range(0, 10), 0.0147f, Random.Range(0, 10)), Quaternion.identity, 0);
 
         p1 = PhotonNetwork.LocalPlayer;
         p2 = PhotonNetwork.LocalPlayer.GetNext();

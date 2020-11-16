@@ -61,7 +61,6 @@ public class SpriteController : Controller
 
     void UpdateMovement()
     {
-
         GroundCheck();
 
         List<InputKey> inputs = InputManager.instance.Inputs();
@@ -137,6 +136,7 @@ public class SpriteController : Controller
             Current = idle;
         }
     }
+
 
     void FixedUpdateMovement()
     {
