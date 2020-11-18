@@ -25,54 +25,77 @@ public class CharacterSelectNetwork : MonoBehaviourPun
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Mode.currentP1Name = ScreenSelectManager.i.p1CharacterCurrent;
-                Mode.currentP2Name = ScreenSelectManager.i.p2CharacterCurrent;
-
-                photonView.RPC("Select", RpcTarget.Others);
-
-                if (photonView.IsMine)
+                if (PlayerIndex.i.playerIndex >= 2)
                 {
-                    if (currentCharacterView >= 2)
+                    Mode.currentP1Name = ScreenSelectManager.i.p1CharacterCurrent;
+                    Mode.currentP2Name = ScreenSelectManager.i.p2CharacterCurrent;
+
+                    photonView.RPC("Select", RpcTarget.Others);
+
+                    if (photonView.IsMine)
                     {
-                        FinishedSelecting();
-                        SpriteLogoSlot.p1Chose = true;
+                        if (currentCharacterView >= 2)
+                        {
+                            FinishedSelecting();
+                            SpriteLogoSlot.p1Chose = true;
+                        }
+                        else
+                        {
+                            if (!SpriteLogoSlot.p1Chose)
+                            {
+                                currentCharacterView++;
+                                rememberCharacter++;
+                                allCharactersSelected++;
+                                SpriteLogoSlot.p1Chose = true;
+                            }
+                        }
                     }
                     else
                     {
-                        if (!SpriteLogoSlot.p1Chose)
+                        if (rememberCharacter < 1)
                         {
-                            currentCharacterView++;
-                            rememberCharacter++;
-                            allCharactersSelected++;
-                            SpriteLogoSlot.p1Chose = true;
+                            if (!SpriteLogoSlot.p2Chose)
+                            {
+                                photonView.RPC("FinishedSelecting", RpcTarget.MasterClient);
+                                SpriteLogoSlot.p2Chose = true;
+                            }
                         }
+                    }
+
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        ScreenSelectManager.i.playerImages[1].sprite = ScreenSelectManager.i.characterSprite[ScreenSelectManager.i.p1CharacterCurrent];
+                        ScreenSelectManager.i.playerNames[1].text = ScreenSelectManager.i.characterName[ScreenSelectManager.i.p1CharacterCurrent];
+                    }
+                    else
+                    {
+                        ScreenSelectManager.i.playerImages[0].sprite = ScreenSelectManager.i.characterSprite[ScreenSelectManager.i.p2CharacterCurrent];
+                        ScreenSelectManager.i.playerNames[0].text = ScreenSelectManager.i.characterName[ScreenSelectManager.i.p2CharacterCurrent];
                     }
                 }
                 else
                 {
-                    if (rememberCharacter < 1)
+                    Mode.currentP1Name = ScreenSelectManager.i.p1CharacterCurrent;
+
+                    photonView.RPC("Select", RpcTarget.Others);
+
+                    if (photonView.IsMine)
                     {
-                        if (!SpriteLogoSlot.p2Chose)
+                        if (!SpriteLogoSlot.p1Chose)
                         {
-                            photonView.RPC("FinishedSelecting", RpcTarget.MasterClient);
-                            SpriteLogoSlot.p2Chose = true;
+                            currentCharacterView++;
+                            FinishedSelecting();
+                            SpriteLogoSlot.p1Chose = true;
                         }
                     }
-                }
-            }
 
-            if (PhotonNetwork.IsMasterClient)
-            {
-                ScreenSelectManager.i.playerImages[1].sprite = ScreenSelectManager.i.characterSprite[ScreenSelectManager.i.p1CharacterCurrent];
-                ScreenSelectManager.i.playerNames[1].text = ScreenSelectManager.i.characterName[ScreenSelectManager.i.p1CharacterCurrent];
-            }
-            else
-            {
-                ScreenSelectManager.i.playerImages[0].sprite = ScreenSelectManager.i.characterSprite[ScreenSelectManager.i.p2CharacterCurrent];
-                ScreenSelectManager.i.playerNames[0].text = ScreenSelectManager.i.characterName[ScreenSelectManager.i.p2CharacterCurrent];
-            }
+                    ScreenSelectManager.i.playerImages[1].sprite = ScreenSelectManager.i.characterSprite[ScreenSelectManager.i.p1CharacterCurrent];
+                    ScreenSelectManager.i.playerNames[1].text = ScreenSelectManager.i.characterName[ScreenSelectManager.i.p1CharacterCurrent];
+                }
+            }          
         }
     }
+
     [PunRPC]
     public void Select()
     {

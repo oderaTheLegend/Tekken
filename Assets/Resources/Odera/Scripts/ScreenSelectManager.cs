@@ -69,13 +69,20 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
 
         if (Mode.mode == Mode.Modes.Online)
         {
-            if (PhotonNetwork.IsMasterClient)
+            if (PlayerIndex.i.playerIndex >= 2)
             {
-                playerNames[0].text = "P2 Deciding";
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    playerNames[0].text = "P2 Deciding";
+                }
+                else
+                {
+                    playerNames[1].text = "P1 Deciding";
+                }
             }
             else
             {
-                playerNames[1].text = "P1 Deciding";
+                playerNames[0].text = "Pick Your Character";
             }
         }
     }

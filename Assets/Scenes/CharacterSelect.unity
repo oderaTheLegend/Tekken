@@ -1032,8 +1032,6 @@ GameObject:
   m_Component:
   - component: {fileID: 359449413}
   - component: {fileID: 359449414}
-  - component: {fileID: 359449415}
-  - component: {fileID: 359449416}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1132,91 +1130,6 @@ MonoBehaviour:
   m_Spacing: {x: 3.4, y: 6.7}
   m_Constraint: 1
   m_ConstraintCount: 16
---- !u!114 &359449415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 359449412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0dd5eb45a96fb44d81acd808fb3bf46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logoSprite:
-  - {fileID: 1640462466}
-  - {fileID: 1305739835}
-  - {fileID: 929815523}
-  - {fileID: 1626122865}
-  - {fileID: 787927588}
-  - {fileID: 250009816}
-  - {fileID: 669543257}
-  - {fileID: 1477942986}
-  - {fileID: 485837862}
-  - {fileID: 154856780}
-  - {fileID: 1571165484}
-  - {fileID: 1441675971}
-  - {fileID: 1158949324}
-  - {fileID: 2145069183}
-  - {fileID: 452335887}
-  - {fileID: 1781027584}
-  - {fileID: 1457610070}
-  - {fileID: 1526900430}
-  - {fileID: 1072618887}
-  - {fileID: 1269069077}
-  - {fileID: 1609357938}
-  - {fileID: 2018123623}
-  - {fileID: 754485882}
-  - {fileID: 406712030}
-  - {fileID: 1796314054}
-  - {fileID: 1817824424}
-  - {fileID: 621615615}
-  - {fileID: 288609405}
-  - {fileID: 1395440528}
-  - {fileID: 1739457612}
-  - {fileID: 696616646}
-  - {fileID: 1764472884}
-  - {fileID: 652944314}
-  - {fileID: 991607314}
-  - {fileID: 220032510}
-  - {fileID: 1640701858}
-  - {fileID: 1866715638}
-  - {fileID: 134850645}
-  - {fileID: 1708390762}
-  - {fileID: 1406343706}
-  - {fileID: 184184456}
-  - {fileID: 1118185168}
-  - {fileID: 1922616203}
-  - {fileID: 1562302827}
-  - {fileID: 2030704116}
-  - {fileID: 1159116229}
-  - {fileID: 1836656003}
-  - {fileID: 1293837413}
-  selectManager: {fileID: 1689444614}
-  slot: {fileID: 2105438818}
---- !u!114 &359449416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 359449412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &406712027
 GameObject:
   m_ObjectHideFlags: 0
@@ -3180,12 +3093,96 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3272204062426580675, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
+      propertyPath: Synchronization
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3272204064457761500, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
       propertyPath: fadeCanvas
       value: 
       objectReference: {fileID: 676741708}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
+--- !u!114 &1015341262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3272204062426580675, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
+  m_PrefabInstance: {fileID: 1015341261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015341263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1015341263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1479054420382208215, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
+  m_PrefabInstance: {fileID: 1015341261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1015341264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015341263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0dd5eb45a96fb44d81acd808fb3bf46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logoSprite:
+  - {fileID: 1640462466}
+  - {fileID: 1305739835}
+  - {fileID: 929815523}
+  - {fileID: 1626122865}
+  - {fileID: 787927588}
+  - {fileID: 250009816}
+  - {fileID: 669543257}
+  - {fileID: 1477942986}
+  - {fileID: 485837862}
+  - {fileID: 154856780}
+  - {fileID: 1571165484}
+  - {fileID: 1441675971}
+  - {fileID: 1158949324}
+  - {fileID: 2145069183}
+  - {fileID: 452335887}
+  - {fileID: 1781027584}
+  - {fileID: 1457610070}
+  - {fileID: 1526900430}
+  - {fileID: 1072618887}
+  - {fileID: 1269069077}
+  - {fileID: 1609357938}
+  - {fileID: 2018123623}
+  - {fileID: 754485882}
+  - {fileID: 406712030}
+  - {fileID: 1796314054}
+  - {fileID: 1817824424}
+  - {fileID: 621615615}
+  - {fileID: 288609405}
+  - {fileID: 1395440528}
+  - {fileID: 1739457612}
+  - {fileID: 696616646}
+  - {fileID: 1764472884}
+  - {fileID: 652944314}
+  - {fileID: 991607314}
+  - {fileID: 220032510}
+  - {fileID: 1640701858}
+  - {fileID: 1866715638}
+  - {fileID: 134850645}
+  - {fileID: 1708390762}
+  - {fileID: 1406343706}
+  - {fileID: 184184456}
+  - {fileID: 1118185168}
+  - {fileID: 1922616203}
+  - {fileID: 1562302827}
+  - {fileID: 2030704116}
+  - {fileID: 1159116229}
+  - {fileID: 1836656003}
+  - {fileID: 1293837413}
+  selectManager: {fileID: 1689444614}
+  characterSelectView: {fileID: 1015341262}
+  slot: {fileID: 2105438818}
 --- !u!1 &1072618884
 GameObject:
   m_ObjectHideFlags: 0

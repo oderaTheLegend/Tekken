@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class LobbyMainPanel : MonoBehaviourPunCallbacks
 {
     [Header("Login Panel")]
@@ -23,7 +22,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     public GameObject CreateRoomPanel;
 
     public InputField RoomNameInputField;
-    public InputField MaxPlayersInputField;
+    public InputField passwordInputField;
 
     [Header("Room List Panel")]
     public GameObject RoomListPanel;
@@ -50,6 +49,14 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         roomListEntries = new Dictionary<string, GameObject>();
 
         PlayerNameInput.text = ""; 
+    }
+
+    private void Update()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+         
+        }
     }
 
     public override void OnConnectedToMaster()
@@ -82,17 +89,17 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         SetActivePanel(SelectionPanel.name);
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        string roomName = "Room " + Random.Range(1000, 10000);
-
-        RoomOptions options = new RoomOptions { MaxPlayers = 2 };
-
-        PhotonNetwork.CreateRoom(roomName, options, null);
-    }
-
     public override void OnJoinedRoom()
     {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            photonView.RPC("RememberPlayers", RpcTarget.All, 2);
+        }
+        else
+        {
+            photonView.RPC("RememberPlayers", RpcTarget.All, 1);
+        }
+
         SetActivePanel(InsideRoomPanel.name);
 
         if (playerListEntries == null)
@@ -185,6 +192,11 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         StartGameButton.gameObject.SetActive(CheckPlayersReady());
     }
 
+    [PunRPC]
+    void RememberPlayers(int value)
+    {
+        PlayerIndex.i.playerIndex = value;
+    }
 
     public void OnBackButtonClicked()
     {
@@ -207,19 +219,17 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         PhotonNetwork.Disconnect();
     }
 
+
     public void OnCreateRoomButtonClicked()
     {
         string roomName = RoomNameInputField.text;
         roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
-        byte maxPlayers;
-        byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 2);
-
-        RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
+        RoomOptions options = new RoomOptions {MaxPlayers = 2};
 
         PhotonNetwork.CreateRoom(roomName, options, null);
     }
+
 
     public void OnLeaveGameButtonClicked()
     {

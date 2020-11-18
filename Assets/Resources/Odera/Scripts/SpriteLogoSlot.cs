@@ -49,9 +49,19 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
             Directional();
             UpdatePosition();
 
-            if (CharacterSelectNetwork.instance.allCharactersSelected >= 2)
+            if (PlayerIndex.i.playerIndex >= 2)
             {
-                photonView.RPC("StartGame", RpcTarget.All);
+                if (CharacterSelectNetwork.instance.allCharactersSelected >= 2)
+                {
+                    photonView.RPC("StartGame", RpcTarget.All);
+                }
+            }
+            else
+            {
+                if(CharacterSelectNetwork.instance.allCharactersSelected == 1)
+                {
+                    StartGame();
+                }
             }
         }
     }

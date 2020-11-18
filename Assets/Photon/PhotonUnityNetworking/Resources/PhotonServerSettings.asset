@@ -64,6 +64,11 @@ MonoBehaviour:
   - SyncAllAnimations
   - FixedUpdateMovement
   - UpdateMovement
+  - SamePassword
+  - RememberPlayers
+  - DecreasePlayer
+  - IncreasePlayer
+  - All
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

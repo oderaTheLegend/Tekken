@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 1849765024558803542}
   - component: {fileID: 1849765024558803541}
   - component: {fileID: 1849765024558803547}
-  - component: {fileID: 1849765024558803546}
+  - component: {fileID: 1849765024259475154}
+  - component: {fileID: 1849765024259475156}
+  - component: {fileID: 1849765024259475155}
   m_Layer: 0
   m_Name: Cammy!
   m_TagString: Untagged
@@ -104,15 +106,12 @@ MonoBehaviour:
   groundAllowance: 0.01037
   speedUpFactor: 20
   movementSpeed: 8
-  idle: {fileID: 11400000, guid: 80e29cb2cfed40349b664b0c010a2421, type: 2}
-  forward: {fileID: 11400000, guid: fb8545e9dc4b8e74191469adb77297d9, type: 2}
-  jump: {fileID: 11400000, guid: be4d0f0a3319dc0429481b103bfc3a0b, type: 2}
-  dirJump: {fileID: 11400000, guid: a6c0334f89148904ab1ce6951e427daa, type: 2}
   comboSetTime: 0.2
-  moveSets:
-  - {fileID: 11400000, guid: 6b1a49e78e8589c4d848bc64c0224d9a, type: 2}
-  - {fileID: 11400000, guid: 56a6a63229cdbd0438ffadbfd96ad510, type: 2}
-  - {fileID: 11400000, guid: fec421cf1b5b63b458b93da2e6314e7e, type: 2}
+  lightAttack:
+    dirKey: 9
+    lKey: 1
+    hKey: 0
+    jKey: 0
 --- !u!65 &1849765024558803542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -158,14 +157,64 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 1849765024558803546}
+  - {fileID: 1849765024259475156}
+  - {fileID: 1849765024259475155}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1849765024558803546
+--- !u!95 &1849765024259475154
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849765024558803540}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e7a428ae95542b48960dffa06b08ab1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1849765024259475156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849765024558803540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: Light
+  - Type: 4
+    SynchronizeType: 1
+    Name: Walk
+  - Type: 9
+    SynchronizeType: 1
+    Name: Jump
+  - Type: 4
+    SynchronizeType: 1
+    Name: Grounded
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!114 &1849765024259475155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,4 +228,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
