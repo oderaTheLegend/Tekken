@@ -158,13 +158,13 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
             }
         }
     }
-
+    public Image slot;
     IEnumerator StartSelect()
     {
-        s.slotPos.GetComponent<Image>().color = Color.red;
+        slot.color = Color.red;
         yield return new WaitForSeconds(3);
         startCharacterSelect = true;
-        s.slotPos.GetComponent<Image>().color = Color.blue;
+        slot.color = Color.blue;
     }
 
     void UpdatePosition()

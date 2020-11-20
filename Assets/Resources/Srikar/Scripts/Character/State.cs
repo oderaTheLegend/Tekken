@@ -33,51 +33,51 @@ public class State : ScriptableObject
     bool jump = false;
     bool finishCheck = false;
 
-    [NonSerialized] public FrameState state;
-
     bool colliderHit = false;
 
-    public FrameState Animate(SpriteRenderer renderer, out float recoveryTime)
+    public void Animate(SpriteRenderer renderer, out float recoveryTime)
     {
-        time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
-
-        if (time > 1)
-        {
-            if (state != FrameState.Finished)
-            {
-                if (index == keyFrame + 1 && colliderHit && hasHit)
-                {
-                    index = (int)keyFrame;
-                    colliderHit = false;
-                }
-
-                if (index >= sprites.Length)
-                {
-                    if (state != FrameState.Looping)
-                    {
-                        if (!finishCheck)
-                            finishCheck = true;
-                        else
-                            state = FrameState.Finished;
-
-                        index = sprites.Length - 1;
-                    }
-                    else
-                    {
-                        index = 0;
-                    }
-                }
-
-                renderer.sprite = sprites[index];
-                index += 1;
-
-                time = 0;
-            }
-        }
+        //time += Time.deltaTime * AnimationMaster.instance.AnimFrames;
+        //
+        //if (time > 1)
+        //{
+        //    if (state != FrameState.Finished)
+        //    {
+        //        if (index == keyFrame + 1 && colliderHit && hasHit)
+        //        {
+        //            index = (int)keyFrame;
+        //            colliderHit = false;
+        //        }
+        //
+        //        if (index >= sprites.Length)
+        //        {
+        //            if (state != FrameState.Looping)
+        //            {
+        //                if (!finishCheck)
+        //                    finishCheck = true;
+        //                else
+        //                    state = FrameState.Finished;
+        //
+        //                index = sprites.Length - 1;
+        //            }
+        //            else
+        //            {
+        //                index = 0;
+        //            }
+        //        }
+        //
+        //        renderer.sprite = sprites[index];
+        //        index += 1;
+        //
+        //        time = 0;
+        //    }
+        //}
+        //
+        //recoveryTime = recoveryPeriod;
+        //
+        //return state;
 
         recoveryTime = recoveryPeriod;
-
-        return state;
     }
 
     public void Reset()
@@ -88,10 +88,10 @@ public class State : ScriptableObject
         finishCheck = false;
         colliderHit = false;
 
-        if (loop)
-            state = FrameState.Looping;
-        else
-            state = FrameState.Running;
+        //if (loop)
+        //    state = FrameState.Looping;
+        //else
+        //    state = FrameState.Running;
     }
 
     public void ColliderHit()

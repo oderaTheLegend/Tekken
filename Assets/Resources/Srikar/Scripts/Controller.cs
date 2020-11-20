@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 
 public enum JumpState
 {
@@ -11,7 +12,7 @@ public enum JumpState
 }
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Controller : MonoBehaviour
+public abstract class Controller : MonoBehaviourPun
 {
     protected Rigidbody rigidbody;
 
