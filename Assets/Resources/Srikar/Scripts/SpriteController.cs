@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public enum InputState
@@ -20,11 +21,16 @@ public class SpriteController : Controller
     [SerializeField] float comboSetTime = 0.2f;
 
     [Header("Specified Inputs")]
-    [SerializeField] InputKey lightAttack; 
+    [SerializeField] InputKey lightAttack;
 
     Vector3 facing;
 
     InputState inputState;
+
+    Collider other;
+    bool fall;
+
+    bool canMove = true;
 
     protected override void Start()
     {
@@ -83,25 +89,29 @@ public class SpriteController : Controller
 
     void FixedUpdateMovement()
     {
-        Vector3 dir = InputManager.instance.Direction();
-
-        if (inputState == InputState.Neutral)
-        {
-            if (dir.z > 0)
-                transform.forward = facing;
-            else if (dir.z < 0)
-                transform.forward = -facing;
-        }
-
         bool move = false;
 
-        if (inputState == InputState.Neutral)
-            Move(dir, out move);
+        if (canMove)
+        {
+            Vector3 dir = InputManager.instance.Direction();
 
-        if (move)
-            anim.SetBool("Walk", true);
-        else
-            anim.SetBool("Walk", false);
+            if (inputState == InputState.Neutral)
+            {
+                if (dir.z > 0)
+                    transform.forward = facing;
+                else if (dir.z < 0)
+                    transform.forward = -facing;
+            }
+
+            if (inputState == InputState.Neutral)
+                Move(dir, out move);
+
+            if (move)
+                anim.SetBool("Walk", true);
+            else
+                anim.SetBool("Walk", false);
+
+        }
 
         if (jumpState == JumpState.Grounded)
             anim.SetBool("Grounded", false);
@@ -109,6 +119,7 @@ public class SpriteController : Controller
             anim.SetBool("Grounded", false);
 
         Gravity();
+
     }
 
     private void FixedUpdate()
@@ -137,8 +148,8 @@ public class SpriteController : Controller
                 inputState = InputState.Combo;
                 anim.SetTrigger("Light");
             }
-            else 
-            { 
+            else
+            {
 
             }
         }
@@ -159,5 +170,52 @@ public class SpriteController : Controller
         inputState = InputState.Recovery;
         yield return new WaitForSeconds(time);
         inputState = InputState.Neutral;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Punch"))
+        {
+            canMove = false;
+            fall = false;
+            this.other = other;
+            anim.SetTrigger("Fall");
+        }
+    }
+
+    void Fall()
+    {
+        Vector3 dir = transform.position - other.transform.position;
+
+        if (!fall)
+        {
+            HealthAmount(5);
+            transform.position += new Vector3(dir.x * 2.3f, 0, 0);
+            fall = true;           
+        }
+    }
+
+    void GetUp()
+    {
+        if (!canMove)
+        {
+            canMove = true;
+        }
+    }
+
+    public void HealthAmount(int damage)
+    {
+        GameManager.i.p1Health.value -= damage;
+
+        if (GameManager.i.p1Health.value <= 0)
+        {
+            anim.SetBool("Die", true);
+            GameManager.i.p1Health.value = 0;
+        }
+
+        if (GameManager.i.p1Health.value >= 100)
+        {
+            GameManager.i.p1Health.value = 100;
+        }
     }
 }

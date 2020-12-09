@@ -10,7 +10,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public static class Mode
 {
-    public enum Modes { Training, Online }
+    public enum Modes { Training, Online, SinglePlayer }
     public static Modes mode;
 
     public static int currentP1Name;
@@ -53,7 +53,7 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        i = this;;
+        i = this;
 
         if (fadeCanvas != null)
         {
@@ -61,6 +61,7 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
         }
 
         disconnectedText.text = "";
+
         p1CharacterCurrent = 0;
         p2CharacterCurrent = 0;
 
@@ -84,6 +85,12 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
             {
                 playerNames[0].text = "Pick Your Character";
             }
+        }
+
+        if(Mode.mode == Mode.Modes.SinglePlayer)
+        {
+            playerNames[0].text = "Pick Your Character";
+            playerImages[0].enabled = false;
         }
     }
 
@@ -142,7 +149,7 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
     #region Functions
     void PlayerDetails()
     {
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
             playerImages[1].sprite = characterSprite[p1CharacterCurrent];
             playerNames[1].text = characterName[p1CharacterCurrent];
@@ -152,7 +159,7 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
     public void ChooseCharacter()
     {
         //Keyboard Input
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {

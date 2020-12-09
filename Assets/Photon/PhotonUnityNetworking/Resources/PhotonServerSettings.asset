@@ -69,6 +69,12 @@ MonoBehaviour:
   - DecreasePlayer
   - IncreasePlayer
   - All
+  - Check
+  - Attacking
+  - Chasing
+  - Idle
+  - SawPlayer
+  - In
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

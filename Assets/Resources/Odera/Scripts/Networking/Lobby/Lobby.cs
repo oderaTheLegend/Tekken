@@ -29,7 +29,7 @@ public class Lobby : MonoBehaviour
 
     public void PressStart()
     {
-        StartCoroutine(FadeToGame(2));
+        StartCoroutine(FadeToGame(1));
     }
 
     public void Back()
@@ -51,7 +51,7 @@ public class Lobby : MonoBehaviour
     }
     IEnumerator FadeToGame(int level)
     {
-        Mode.mode = Mode.Modes.Training;
+        Mode.mode = Mode.Modes.SinglePlayer;
         UIJuice.instance.GroupAlphaLerp(menu.GetComponent<CanvasGroup>(), 0, 1.5f);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(level);

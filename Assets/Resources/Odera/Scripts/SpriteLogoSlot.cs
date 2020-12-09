@@ -36,7 +36,7 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
             if (!selected)
             {
@@ -119,16 +119,19 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
     public void Directional()
     {
         //Keyboard Controls
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (startCharacterSelect)
             {
-                s.p1CharacterCurrent--;
-            }
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    s.p1CharacterCurrent--;
+                }
 
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                s.p1CharacterCurrent++;
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    s.p1CharacterCurrent++;
+                }
             }
         }
         else
@@ -217,17 +220,20 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
         }
         else
         {
-            if (s.p1CharacterCurrent < minCharacterNo)
+            if (startCharacterSelect)
             {
-                s.p1CharacterCurrent = minCharacterNo;
-            }
-            else if (s.p1CharacterCurrent > maxCharacterNo)
-            {
-                s.p1CharacterCurrent = maxCharacterNo;
-            }
-            else
-            {
-                s.slotPos.transform.position = logoSprite[s.p1CharacterCurrent].transform.position;
+                if (s.p1CharacterCurrent < minCharacterNo)
+                {
+                    s.p1CharacterCurrent = minCharacterNo;
+                }
+                else if (s.p1CharacterCurrent > maxCharacterNo)
+                {
+                    s.p1CharacterCurrent = maxCharacterNo;
+                }
+                else
+                {
+                    s.slotPos.transform.position = logoSprite[s.p1CharacterCurrent].transform.position;
+                }
             }
         }
     }

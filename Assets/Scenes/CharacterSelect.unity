@@ -3103,17 +3103,6 @@ PrefabInstance:
       objectReference: {fileID: 676741708}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
---- !u!114 &1015341262 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3272204062426580675, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
-  m_PrefabInstance: {fileID: 1015341261}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015341263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1015341263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1479054420382208215, guid: 808e15eae85ba01448ee8910f54112b6, type: 3}
@@ -3181,7 +3170,6 @@ MonoBehaviour:
   - {fileID: 1836656003}
   - {fileID: 1293837413}
   selectManager: {fileID: 1689444614}
-  characterSelectView: {fileID: 1015341262}
   slot: {fileID: 2105438818}
 --- !u!1 &1072618884
 GameObject:
@@ -6115,7 +6103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1689444615}
   - component: {fileID: 1689444616}
-  - component: {fileID: 1689444617}
   m_Layer: 0
   m_Name: ScreenSelectManager
   m_TagString: Untagged
@@ -6176,19 +6163,6 @@ MonoBehaviour:
   disconnectedText: {fileID: 1891733566}
   canSelectP1: 0
   canSelectP2: 0
---- !u!114 &1689444617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689444614}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1024ef60037084e885bf5ebf66e77f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerOverviewEntryPrefab: {fileID: 168392, guid: f03d1c686a26a1d4da99a4186b0bb1ab, type: 3}
 --- !u!1 &1708390759
 GameObject:
   m_ObjectHideFlags: 0
