@@ -48,14 +48,14 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         cachedRoomList = new Dictionary<string, RoomInfo>();
         roomListEntries = new Dictionary<string, GameObject>();
 
-        PlayerNameInput.text = ""; 
+        PlayerNameInput.text = "";
     }
 
     private void Update()
     {
         if (PhotonNetwork.InRoom)
         {
-         
+
         }
     }
 
@@ -225,7 +225,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         string roomName = RoomNameInputField.text;
         roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
-        RoomOptions options = new RoomOptions {MaxPlayers = 2};
+        RoomOptions options = new RoomOptions { MaxPlayers = 2 };
 
         PhotonNetwork.CreateRoom(roomName, options, null);
     }
@@ -248,6 +248,14 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         else
         {
             Debug.LogError("Invalid Nickname.");
+        }
+    }
+
+    public void OnMobile()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true);
         }
     }
 
@@ -325,7 +333,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         SelectionPanel.SetActive(activePanel.Equals(SelectionPanel.name));
         CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
         RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
-        InsideRoomPanel.SetActive(activePanel.Equals(InsideRoomPanel.name)); 
+        InsideRoomPanel.SetActive(activePanel.Equals(InsideRoomPanel.name));
         MainMenu.SetActive(activePanel.Equals(MainMenu.name));
     }
 

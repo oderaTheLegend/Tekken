@@ -24,12 +24,12 @@ public class Lobby : MonoBehaviour
     }
     public void LoadCharacterSelect()
     {
-        StartCoroutine(FadeToGame(1));
+        StartCoroutine(FadeToGame(1, 0));
     }
 
     public void PressStart()
     {
-        StartCoroutine(FadeToGame(2));
+        StartCoroutine(FadeToGame(1, 2));
     }
 
     public void Back()
@@ -49,9 +49,9 @@ public class Lobby : MonoBehaviour
         back.interactable = true;
         login.interactable = true;
     }
-    IEnumerator FadeToGame(int level)
+    IEnumerator FadeToGame(int level, int mode)
     {
-        Mode.mode = Mode.Modes.Training;
+        Mode.mode = (Mode.Modes)mode;
         UIJuice.instance.GroupAlphaLerp(menu.GetComponent<CanvasGroup>(), 0, 1.5f);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(level);

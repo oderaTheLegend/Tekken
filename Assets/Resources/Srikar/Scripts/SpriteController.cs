@@ -20,12 +20,14 @@ public class SpriteController : Controller
     [SerializeField] float comboSetTime = 0.2f;
 
     [Header("Specified Inputs")]
-    [SerializeField] InputKey lightAttack; 
+    [SerializeField] InputKey lightAttack;
 
     Vector3 facing;
 
     InputState inputState;
 
+    Vector3 mobileDir;
+    Vector3 dir;
     protected override void Start()
     {
         base.Start();
@@ -50,7 +52,6 @@ public class SpriteController : Controller
         {
             UpdateMovement();
         }
-
     }
 
     void UpdateMovement()
@@ -70,33 +71,60 @@ public class SpriteController : Controller
 
             if (inputState == InputState.Neutral)
             {
-                // Otherwise executes neutral/jump states
-                if (inputs[1].jKey == HitKey.Jump && jumpState == JumpState.Grounded)
+                if (Application.platform == RuntimePlatform.Android)
                 {
-                    anim.SetTrigger("Jump");
-                    Jump();
+                    if (GameManager.instance.joystick.jump && jumpState == JumpState.Grounded)
+                    {
+                        anim.SetTrigger("Jump");
+                        Jump();
+                        GameManager.instance.joystick.jump = false;
+                    }
+                }
+                else
+                {
+                    // Otherwise executes neutral/jump states
+                    if (inputs[1].jKey == HitKey.Jump && jumpState == JumpState.Grounded)
+                    {
+                        anim.SetTrigger("Jump");
+                        Jump();
+                    }
                 }
             }
         }
     }
 
-
     void FixedUpdateMovement()
     {
-        Vector3 dir = InputManager.instance.Direction();
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            mobileDir = GameManager.instance.joystick.inputDirection;
+        }
+        else
+        {
+           dir = InputManager.instance.Direction();
+        }
 
         if (inputState == InputState.Neutral)
         {
-            if (dir.z > 0)
+            if (dir.z > 0 || mobileDir.z > 0)
                 transform.forward = facing;
-            else if (dir.z < 0)
+            else if (dir.z < 0 || mobileDir.z < 0)
                 transform.forward = -facing;
         }
 
         bool move = false;
 
         if (inputState == InputState.Neutral)
-            Move(dir, out move);
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                Move(mobileDir, out move);
+            }
+            else
+            {
+                Move(dir, out move);
+            }
+        }
 
         if (move)
             anim.SetBool("Walk", true);
@@ -128,18 +156,37 @@ public class SpriteController : Controller
 
     void ComboCheck(List<InputKey> input, List<int> frames)
     {
-        int frameGap = InputManager.instance.FrameGap();
-
-        if (input[1].Compare(lightAttack))
+        if (Application.platform == RuntimePlatform.Android)
         {
-            if (inputState == InputState.Neutral)
+            if (GameManager.instance.joystick.attack)
             {
-                inputState = InputState.Combo;
-                anim.SetTrigger("Light");
-            }
-            else 
-            { 
+                if (inputState == InputState.Neutral)
+                {
+                    inputState = InputState.Combo;
+                    anim.SetTrigger("Light");
+                    GameManager.instance.joystick.attack = false;
+                }
+                else
+                {
 
+                }
+            }
+        }
+        else
+        {
+            int frameGap = InputManager.instance.FrameGap();
+
+            if (input[1].Compare(lightAttack))
+            {
+                if (inputState == InputState.Neutral)
+                {
+                    inputState = InputState.Combo;
+                    anim.SetTrigger("Light");
+                }
+                else
+                {
+
+                }
             }
         }
     }

@@ -12,18 +12,57 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform p1DetailsPos;
     public Transform p2DetailsPos;
 
+    public Text p1Name;
+
+    public GameObject playerChain;
+    public GameObject playerSaw;
+
+    [HideInInspector] public Joystick joystick;
+    public GameObject stick;
+
+    public GameObject mobileInventory;
+
+    public static GameManager instance;
+
     void Start()
     {
-        PhotonNetwork.Instantiate("Cammy!", new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+        instance = this;
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (stick != null)
+            {
+                joystick = stick.GetComponent<Joystick>();
+            }
+
+            mobileInventory.SetActive(true);
+        }
+        else
+        {
+            mobileInventory.SetActive(false);
+        }
 
         UIJuice.instance.GroupAlphaLerp(fadeCanvas.GetComponent<CanvasGroup>(), 0, 1);
 
         if (Mode.mode == Mode.Modes.Training)
         {
             commonItems.SetActive(true);
+
+            if (ScreenSelectManager.i.p1CharacterCurrent == 0)
+            {
+                Instantiate(playerChain, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+                p1Name.text = "Chain";
+            }
+            else
+            {
+                Instantiate(playerSaw, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+                p1Name.text = "Saw";
+            }
         }
-        else
+        else if (Mode.mode == Mode.Modes.Online)
         {
+            PhotonNetwork.Instantiate("Cammy!", new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+
             commonItems.SetActive(false);
 
             if (PlayerIndex.i.playerIndex >= 2)
@@ -48,6 +87,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
                 P1.transform.parent = mainCanvas.transform;
                 P1.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        else
+        {
+            if (ScreenSelectManager.i.p1CharacterCurrent == 0)
+            {
+                Instantiate(playerChain, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+                p1Name.text = "Chain";
+            }
+            else
+            {
+                Instantiate(playerSaw, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+                p1Name.text = "Saw";
             }
         }
     }

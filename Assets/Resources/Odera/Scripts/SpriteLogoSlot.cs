@@ -24,6 +24,7 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
 
     bool startCharacterSelect;
 
+    public Image slot;
     void Start()
     {
         StartCoroutine(StartSelect());
@@ -36,7 +37,7 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
             if (!selected)
             {
@@ -58,7 +59,7 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
             }
             else
             {
-                if(CharacterSelectNetwork.instance.allCharactersSelected == 1)
+                if (CharacterSelectNetwork.instance.allCharactersSelected == 1)
                 {
                     StartGame();
                 }
@@ -119,16 +120,33 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
     public void Directional()
     {
         //Keyboard Controls
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Application.platform == RuntimePlatform.Android)
             {
-                s.p1CharacterCurrent--;
-            }
+                if (CharacterSelectNetwork.instance.analogKeyPad.left)
+                {
+                    s.p1CharacterCurrent--;
+                    CharacterSelectNetwork.instance.analogKeyPad.left = false;
+                }
 
-            if (Input.GetKeyDown(KeyCode.D))
+                if (CharacterSelectNetwork.instance.analogKeyPad.right)
+                {
+                    s.p1CharacterCurrent++;
+                    CharacterSelectNetwork.instance.analogKeyPad.right = false;
+                }
+            }
+            else
             {
-                s.p1CharacterCurrent++;
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    s.p1CharacterCurrent--;
+                }
+
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    s.p1CharacterCurrent++;
+                }
             }
         }
         else
@@ -139,14 +157,29 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
                 {
                     if (!p1Chose)
                     {
-                        if (Input.GetKeyDown(KeyCode.A))
+                        if (Application.platform == RuntimePlatform.Android)
                         {
-                            photonView.RPC("RememberP1", RpcTarget.All, -1);
-                        }
+                            if (CharacterSelectNetwork.instance.analogKeyPad.right)
+                            {
+                                photonView.RPC("RememberP1", RpcTarget.All, 1);
+                            }
 
-                        if (Input.GetKeyDown(KeyCode.D))
+                            if (CharacterSelectNetwork.instance.analogKeyPad.left)
+                            {
+                                photonView.RPC("RememberP1", RpcTarget.All, -1);
+                            }
+                        }
+                        else
                         {
-                            photonView.RPC("RememberP1", RpcTarget.All, 1);
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                photonView.RPC("RememberP1", RpcTarget.All, -1);
+                            }
+
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                photonView.RPC("RememberP1", RpcTarget.All, 1);
+                            }
                         }
                     }
                 }
@@ -154,27 +187,44 @@ public class SpriteLogoSlot : MonoBehaviourPunCallbacks
                 {
                     if (!p2Chose)
                     {
-                        if (Input.GetKeyDown(KeyCode.A))
+                        if (Application.platform == RuntimePlatform.Android)
                         {
-                            photonView.RPC("RememberP2", RpcTarget.All, -1);
-                        }
+                            if (CharacterSelectNetwork.instance.joyStick.right)
+                            {
+                                photonView.RPC("RememberP2", RpcTarget.All, 1);
+                            }
 
-                        if (Input.GetKeyDown(KeyCode.D))
+                            if (CharacterSelectNetwork.instance.joyStick.left)
+                            {
+                                photonView.RPC("RememberP2", RpcTarget.All, -1);
+                            }
+                        }
+                        else
                         {
-                            photonView.RPC("RememberP2", RpcTarget.All, 1);
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                photonView.RPC("RememberP2", RpcTarget.All, -1);
+                            }
+
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                photonView.RPC("RememberP2", RpcTarget.All, 1);
+                            }
                         }
                     }
                 }
             }
         }
     }
-    public Image slot;
     IEnumerator StartSelect()
     {
-        slot.color = Color.red;
-        yield return new WaitForSeconds(3);
-        startCharacterSelect = true;
-        slot.color = Color.blue;
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            slot.color = Color.red;
+            yield return new WaitForSeconds(3);
+            startCharacterSelect = true;
+            slot.color = Color.blue;
+        }
     }
 
     void UpdatePosition()

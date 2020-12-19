@@ -10,7 +10,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public static class Mode
 {
-    public enum Modes { Training, Online }
+    public enum Modes { Training, Online, Story }
     public static Modes mode;
 
     public static int currentP1Name;
@@ -51,13 +51,24 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
 
     public static ScreenSelectManager i;
 
+    public GameObject mobileInventory;
+
     private void Start()
     {
-        i = this;;
+        i = this;
 
         if (fadeCanvas != null)
         {
             UIJuice.instance.GroupAlphaLerp(fadeCanvas.GetComponent<CanvasGroup>(), 1, 2);
+        }
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            mobileInventory.SetActive(true);
+        }
+        else
+        {
+            mobileInventory.SetActive(false);
         }
 
         disconnectedText.text = "";
@@ -84,6 +95,12 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
             {
                 playerNames[0].text = "Pick Your Character";
             }
+        }
+
+        if (Mode.mode == Mode.Modes.Story)
+        {
+            playerNames[0].text = "Pick Your Character";
+            playerImages[0].enabled = false;
         }
     }
 
@@ -142,7 +159,7 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
     #region Functions
     void PlayerDetails()
     {
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
             playerImages[1].sprite = characterSprite[p1CharacterCurrent];
             playerNames[1].text = characterName[p1CharacterCurrent];
@@ -152,30 +169,60 @@ public class ScreenSelectManager : MonoBehaviourPunCallbacks
     public void ChooseCharacter()
     {
         //Keyboard Input
-        if (Mode.mode == Mode.Modes.Training)
+        if (Mode.mode != Mode.Modes.Online)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Application.platform == RuntimePlatform.Android)
             {
-                SpriteLogoSlot.selected = true;
-
-                StartCoroutine(FadeVersus(false));
-
-                playableCharacter.Add(characterName[p1CharacterCurrent]);
-
-                if (playableCharacter.Count >= 2)
+                if (CharacterSelectNetwork.instance.joyStick.selected)
                 {
-                    playableCharacter.RemoveAt(0);
+                    SpriteLogoSlot.selected = true;
+
+                    StartCoroutine(FadeVersus(false));
+
+                    playableCharacter.Add(characterName[p1CharacterCurrent]);
+
+                    if (playableCharacter.Count >= 2)
+                    {
+                        playableCharacter.RemoveAt(0);
+                    }
+                }
+
+                if (CharacterSelectNetwork.instance.joyStick.unselected)
+                {
+                    if (playableCharacter.Count == 1)
+                    {
+                        StopAllCoroutines();
+                        SpriteLogoSlot.selected = false;
+                        StartCoroutine(FadeVersus(true));
+                        playableCharacter.RemoveAt(0);
+                    }
                 }
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else
             {
-                if (playableCharacter.Count == 1)
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    StopAllCoroutines();
-                    SpriteLogoSlot.selected = false;
-                    StartCoroutine(FadeVersus(true));
-                    playableCharacter.RemoveAt(0);
+                    SpriteLogoSlot.selected = true;
+
+                    StartCoroutine(FadeVersus(false));
+
+                    playableCharacter.Add(characterName[p1CharacterCurrent]);
+
+                    if (playableCharacter.Count >= 2)
+                    {
+                        playableCharacter.RemoveAt(0);
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (playableCharacter.Count == 1)
+                    {
+                        StopAllCoroutines();
+                        SpriteLogoSlot.selected = false;
+                        StartCoroutine(FadeVersus(true));
+                        playableCharacter.RemoveAt(0);
+                    }
                 }
             }
 
