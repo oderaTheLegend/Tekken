@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4272306063
+    locked: 0
+  - name: Buildings
+    uniqueID: 289551827
+    locked: 0
+  - name: Props
+    uniqueID: 4205004501
+    locked: 0
+  - name: Enemies
+    uniqueID: 3183949457
+    locked: 0
+  - name: Characters
+    uniqueID: 3247050543
+    locked: 0
+  - name: Objects
+    uniqueID: 2869665237
+    locked: 0
