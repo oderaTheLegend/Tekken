@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public static GameManager instance;
 
+    int howMany;
     void Start()
     {
         instance = this;
@@ -53,18 +54,27 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             if (ScreenSelectManager.i.p1CharacterCurrent == 0)
             {
-                Instantiate(playerChain, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
-                p1Name.text = "Chain";
+                Instantiate(playerChain, new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+            //    p1Name.text = "Chain";
             }
             else
             {
-                Instantiate(playerSaw, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
-                p1Name.text = "Saw";
+                Instantiate(playerSaw, new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+              //  p1Name.text = "Saw";
             }
         }
         else if (Mode.mode == Mode.Modes.Online)
         {
-            PhotonNetwork.Instantiate("Cammy!", new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
+            if (ScreenSelectManager.i.p1CharacterCurrent == 0)
+            {
+                PhotonNetwork.Instantiate("Player_01", new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("ok");
+                PhotonNetwork.Instantiate("Player_02", new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+            }
+          
 
             commonItems.SetActive(false);
 
@@ -96,13 +106,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (ScreenSelectManager.i.p1CharacterCurrent == 0)
             {
-                Instantiate(playerChain, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
-                p1Name.text = "Chain";
+                Instantiate(playerChain, new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+             //   p1Name.text = "Chain";
             }
             else
             {
-                Instantiate(playerSaw, new Vector3(Random.Range(0, 5), 0.0147f, Random.Range(0, 5)), Quaternion.identity);
-                p1Name.text = "Saw";
+                Instantiate(playerSaw, new Vector3(-2.39899993f, -1.25899994f, -0.600000024f), Quaternion.identity);
+             //   p1Name.text = "Saw";
             }
         }
     }

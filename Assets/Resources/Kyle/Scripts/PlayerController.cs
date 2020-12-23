@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int dragDefault = 2;
     [SerializeField] int attackFatigueDrag = 75;
 
+
+    Vector3 mobileDir;
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,14 +39,60 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ComboTime();
-        Moving();
-        Attacks();
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                ComboTime();
+                Moving();
+                Attacks();
+            }
+        }
+        else
+        {
+            ComboTime();
+            Moving();
+            Attacks();
+        }
     }
 
+    Vector3 dir;
     private void FixedUpdate()
     {
-        characterMovement.Move(horizontalMovement, verticalMovement, false);
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            mobileDir = GameManager.instance.joystick.inputDirection;
+        }
+        else
+        {
+            dir = new Vector3(horizontalMovement, verticalMovement, 0);
+        }
+
+        if (Mode.mode == Mode.Modes.Online)
+        {
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                if (Application.platform == RuntimePlatform.Android)
+                {
+                    characterMovement.Move(mobileDir.x, mobileDir.y, false);
+                }
+                else
+                {
+                    characterMovement.Move(dir.x, dir.y, false);
+                }
+            }
+        }
+        else
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                characterMovement.Move(mobileDir.x, mobileDir.y, false);
+            }
+            else
+            {
+                characterMovement.Move(dir.x, dir.y, false);
+            }
+        }
     }
 
     void Moving()
@@ -65,7 +115,7 @@ public class PlayerController : MonoBehaviour
         attackButton = Input.GetAxis("Attack");
         specialButton = Input.GetAxis("Special");
 
-        if(gaugeCurrent == gaugeMax)
+        if (gaugeCurrent == gaugeMax)
         {
             if (Input.GetButtonDown("Special"))
             {
@@ -78,18 +128,34 @@ public class PlayerController : MonoBehaviour
         //  ------------------------------------------ Attack Combo ---------------------------------
         if (comboStep == 0)
         {
-            if (Input.GetButtonDown("Attack"))
+            if (Application.platform == RuntimePlatform.Android)
             {
-                currentComboTimer = comboTimerReset;
-                AttackFatigue();
-                animatorCont.Play("Player 1 Attack");
-                comboStep = 1;
-                return;
+                if (GameManager.instance.joystick.attack)
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 Attack");
+                    comboStep = 1;
+                    GameManager.instance.joystick.attack = false;
+                    return;
+                }
             }
+            else
+            {
+                if (Input.GetButtonDown("Attack"))
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 Attack");
+                    comboStep = 1;
+                    return;
+                }
+            }
+          
         }
-        if(comboStep != 0)
-        { 
-            if(comboPossible)
+        if (comboStep != 0)
+        {
+            if (comboPossible)
             {
                 comboPossible = false;
                 comboStep += 1;
@@ -104,24 +170,51 @@ public class PlayerController : MonoBehaviour
 
     public void Combo()
     {
-        if(comboStep == 2)
+        if (comboStep == 2)
         {
-            if (Input.GetKey(KeyCode.J))
+            if (Application.platform == RuntimePlatform.Android)
             {
-                currentComboTimer = comboTimerReset;
-                AttackFatigue();
-                animatorCont.Play("Player 1 AttackA");
+                if (GameManager.instance.joystick.attack)
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 AttackA");
+                    GameManager.instance.joystick.attack = false;
+                }
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.J))
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 AttackA");
+                }
             }
 
         }
-        if(comboStep == 3)
+
+        if (comboStep == 3)
         {
-            if (Input.GetKey(KeyCode.J))
+            if (Application.platform == RuntimePlatform.Android)
             {
-                currentComboTimer = comboTimerReset;
-                AttackFatigue();
-                animatorCont.Play("Player 1 AttackB");
+                if (GameManager.instance.joystick.attack)
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 AttackB");
+                    GameManager.instance.joystick.attack = false;
+                }
             }
+            else
+            {
+                if (Input.GetKey(KeyCode.J))
+                {
+                    currentComboTimer = comboTimerReset;
+                    AttackFatigue();
+                    animatorCont.Play("Player 1 AttackB");
+                }
+            }         
         }
     }
 
@@ -149,7 +242,7 @@ public class PlayerController : MonoBehaviour
             comboStep = 0;
             currentComboTimer = comboTimerReset;
         }
-        if(isAttacking)
+        if (isAttacking)
         {
             currentComboTimer = comboTimerReset;
         }
