@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public int lifeHealth;
+
+    public bool GameOver;
     public GameObject commonItems;
     public GameObject fadeCanvas;
     public GameObject mainCanvas;
