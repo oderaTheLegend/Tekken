@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 9a629307e8c849e43b82448f211e881c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CharacterSelect.unity
     guid: 1a3246b57bb67814d933dce16529fb93
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SpriteTest.unity
     guid: e9790b3800b45274e9ac578a68434b40
+  - enabled: 1
+    path: Assets/Resources/Srikar/Scripts/Shader/ShaderTest.unity
+    guid: c5534ad4c427d5145a256b749f5fbf43
   m_configObjects: {}
